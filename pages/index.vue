@@ -70,6 +70,32 @@ onMounted(() => {
     ease: 'power1.inOut',
   })
 })
+
+function handleClick() {
+  const tl = gsap.timeline();
+
+  tl.to(['#welcome', '#enter', '#scroll-down'], {
+    opacity: 0,
+    display: 'none',
+    duration: 0.6,
+    ease: 'power2.inOut',
+  })
+
+  .to('#wrapper', {
+    duration: 1.2,
+    ease: 'power1.in',
+    transformOrigin: 'bottom center',
+  })
+
+  .to('#wrapper', {
+    filter: 'blur(10px) brightness(0)',
+  })
+
+  .add(() => {
+    navigateTo('/about')
+  });
+}
+
 </script>
 
 
@@ -77,13 +103,12 @@ onMounted(() => {
   <div id="wrapper" class="w-screen h-screen overflow-hidden relative">
     <div 
       id="forest" 
-      style="background-image: url('/forest.png');"
       class="w-full h-[100vh] flex flex-col items-center justify-center gap-6 absolute inset-0 bg-no-repeat bg-cover blur-[6px] brightness-[60%] pointer-events-none"
     >
       <strong id="welcome" class="text-white text-8xl opacity-0">W e l c o m e</strong>
 
       <button 
-        @click="() => console.log('clicked')" 
+        @click.prevent="handleClick" 
         id="enter" 
         class="btn bg-blue-600 hover:bg-blue-700 border-transparent shadow-none text-white opacity-0 z-50 pointer-events-auto"
       >
@@ -98,6 +123,7 @@ onMounted(() => {
 
     <div class="absolute bottom-0 right-1/2 opacity-80 animate-bounce flex flex-col gap-3 justify-center items-center translate-x-1/2 my-3">
       <button 
+        id="scroll-down"
         @click="() => endSectionRef?.scrollIntoView({behavior: 'smooth'})" 
         class="w-7 h-7 text-base-200 cursor-pointer animate-pulse flex justify-center items-center rounded-full"
       >
@@ -118,5 +144,9 @@ onMounted(() => {
 
 #enter {
   font-family: Poppins;
+}
+
+#forest {
+  background-image: url('/forest.png');
 }
 </style>
