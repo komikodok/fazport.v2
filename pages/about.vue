@@ -2,7 +2,7 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-import Navbar from '~/components/Navbar.vue'
+import Profile from '~/components/Profile.vue'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -30,7 +30,7 @@ onMounted(() => {
 
 <template>
     <div id="wrapper" class="relative w-screen h-screen">
-        <Navbar />
+        <Profile />
 
         <div class="w-full h-full flex">
             <div
