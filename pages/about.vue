@@ -4,6 +4,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import Profile from '~/components/Profile.vue'
 
+const mousePosition = reactive({
+    x: 0,
+    y: 0
+})
+
 gsap.registerPlugin(ScrollTrigger)
 
 onMounted(() => {
@@ -14,45 +19,47 @@ onMounted(() => {
             ease: 'power1.in'
         }
     )
-
-    const tl = gsap.timeline({
-        scrollTrigger: {
-        trigger: '#wrapper',
-        start: 'top top',
-        end: '+=250%',
-        pin: true,
-        scrub: 2,
-        }
-    })
-    tl.to('#wrapper', { x: -1000, ease: 'power1'})
 })
+
+function handleMouseMove(e: MouseEvent) {
+    e.preventDefault()
+
+    gsap.to('#bg-layer', {
+        clipPath: `circle(100px at ${e.clientX}px ${e.clientY}px)`,
+        filter: 'blur(0px) brightness(1.5)'
+    })
+}
 </script>
 
 <template>
-    <div id="wrapper" class="relative w-screen h-screen">
-        <Profile />
+    <div @mousemove="handleMouseMove" id="wrapper" class="relative w-screen h-screen">
+        
+        <div class="w-full h-full">
+            <div
+                id="bg-brightness"
+                class="w-full h-full absolute inset-0 bg-no-repeat brightness-[50%] bg-cover"
+            >
+                <Profile />
+            </div>
 
-        <div class="w-full h-full flex">
             <div
-                class="bg-layer w-full h-full bg-no-repeat flex-shrink-0 brightness-[70%] blur-[2px] bg-cover flex justify-center items-center"
-                style="background-image: url('/forest2.jpeg');"
-            />
-            <div
-                class="bg-layer w-full h-full bg-no-repeat flex-shrink-0 brightness-[70%] blur-[2px] bg-cover flex justify-center items-center"
-                style="background-image: url('/forest2.jpeg');"
-            />
+                id="bg-layer"
+                class="w-full h-full absolute inset-0 bg-no-repeat bg-cover"
+            >
+                <Profile />
+            </div>
         </div>
     </div>
 </template>
 
 <style>
-#bg-layer {
+#bg-brightness {
     background-image: url('/forest2.jpeg');
 }
 
-#lens {
+#bg-layer {
     background-image: url('/forest2.jpeg');
-    clip-path: circle(100px at 0px 0px);
-    filter: blur(0px) brightness(1.5);
+    clip-path: circle('100px at 0px 0px');
+    filter: blur(0) brightness(1.5);
 }
 </style>
