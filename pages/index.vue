@@ -117,8 +117,8 @@ function handleClick() {
     </div>
 
     <div class="absolute inset-0 w-full h-full pointer-events-none">
-      <img id="tree-right" src="/tree-right.png" alt="Tree1" class="object-cover h-full absolute -right-62 max-lg:hidden blur-[1px] scale-120 brightness-[10%] z-10">
-      <img id="tree-left" src="/tree-left.png" alt="Tree2" class="object-cover h-full absolute -left-62 max-lg:-left-96 blur-[1px] scale-120 brightness-[10%] z-10">
+      <img id="tree-right" src="/tree-right.png" alt="Tree1" class="object-cover h-full absolute -right-62 max-lg:hidden blur-[1px] scale-120 brightness-[7%] z-10">
+      <img id="tree-left" src="/tree-left.png" alt="Tree2" class="object-cover h-full absolute -left-62 max-lg:-left-96 blur-[1px] scale-120 brightness-[7%] z-10">
     </div> 
 
     <div class="absolute bottom-0 right-1/2 opacity-80 animate-bounce flex flex-col gap-3 justify-center items-center translate-x-1/2 my-3">
@@ -147,6 +147,6 @@ function handleClick() {
 }
 
 #forest {
-  background-image: url('/forest.png');
+  background-image: url('/forest.jpeg');
 }
 </style>

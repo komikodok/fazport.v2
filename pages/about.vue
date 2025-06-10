@@ -4,62 +4,78 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import Profile from '~/components/Profile.vue'
 
-const mousePosition = reactive({
-    x: 0,
-    y: 0
-})
+const flashlightState = ref<boolean>(false);
 
 gsap.registerPlugin(ScrollTrigger)
 
 onMounted(() => {
-    gsap.fromTo('#wrapper', 
-        { filter: 'blur(0px) brightness(0.2)' },
+    const tl = gsap.timeline()
+    tl.fromTo('#wrapper', 
+        { filter: 'blur(0px) brightness(0.2)', },
         { 
             filter: 'blur(0px) brightness(1)',
             ease: 'power1.in'
         }
     )
+    tl.to(['#bg-layer', '#flashlight'], {
+        backgroundPositionY: '100%',
+        duration: 5,
+        ease: 'power1'
+    })
 })
 
 function handleMouseMove(e: MouseEvent) {
     e.preventDefault()
 
-    gsap.to('#bg-layer', {
+    gsap.to('#flashlight', {
         clipPath: `circle(100px at ${e.clientX}px ${e.clientY}px)`,
-        filter: 'blur(0px) brightness(1.5)'
+        filter: 'blur(0px) brightness(1)',
+        ease: 'power4'
     })
+}
+
+function handleFlashlight() {
+    flashlightState.value = !flashlightState.value
 }
 </script>
 
 <template>
-    <div @mousemove="handleMouseMove" id="wrapper" class="relative w-screen h-screen">
+    <div @mousemove="handleMouseMove" id="wrapper" class="relative w-screen h-screen overflow-x-hidden">
         
         <div class="w-full h-full">
             <div
-                id="bg-brightness"
-                class="w-full h-full absolute inset-0 bg-no-repeat brightness-[50%] bg-cover"
+                id="bg-layer"
+                class="w-full h-full absolute inset-0 bg-no-repeat brightness-[20%] bg-cover"
             >
                 <Profile />
             </div>
 
             <div
-                id="bg-layer"
+                v-if="flashlightState"
+                id="flashlight"
                 class="w-full h-full absolute inset-0 bg-no-repeat bg-cover"
             >
                 <Profile />
+            </div>
+
+            <div class="absolute top-0 left-0 z-30 p-4 m-2">
+                <ul class="flex gap-5">
+                    <li class="text-white cursor-pointer">Phone</li>
+                    <li @click.prevent="handleFlashlight" class="text-white cursor-pointer">Flashlight</li>
+                </ul>
             </div>
         </div>
     </div>
 </template>
 
 <style>
-#bg-brightness {
+#bg-layer {
     background-image: url('/forest2.jpeg');
 }
 
-#bg-layer {
+#flashlight {
     background-image: url('/forest2.jpeg');
     clip-path: circle('100px at 0px 0px');
-    filter: blur(0) brightness(1.5);
+    filter: blur(0) brightness(1);
 }
 </style>
