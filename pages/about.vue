@@ -4,21 +4,32 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import Profile from '~/components/Profile.vue'
 
-const flashlightState = ref<boolean>(false);
+const openProfile = ref<boolean>(false)
 
 gsap.registerPlugin(ScrollTrigger)
 
 onMounted(() => {
     const tl = gsap.timeline()
     tl.fromTo('#wrapper', 
-        { filter: 'blur(0px) brightness(0.2)', },
+        { filter: 'blur(0px) brightness(0.1)', },
         { 
             filter: 'blur(0px) brightness(1)',
             ease: 'power1.in'
         }
     )
-    tl.to(['#bg-layer', '#flashlight'], {
+    .to(['#bg-layer', '#flashlight'], {
         backgroundPositionY: '100%',
+        duration: 5,
+        ease: 'power1'
+    })
+    .to('#bg-layer', { 
+        zIndex: 0,
+        onComplete: () => {
+            openProfile.value = true
+        }
+     })
+    .to(['#bg-layer', '#flashlight'], {
+        backgroundPositionY: '50%',
         duration: 5,
         ease: 'power1'
     })
@@ -33,10 +44,6 @@ function handleMouseMove(e: MouseEvent) {
         ease: 'power4'
     })
 }
-
-function handleFlashlight() {
-    flashlightState.value = !flashlightState.value
-}
 </script>
 
 <template>
@@ -45,23 +52,21 @@ function handleFlashlight() {
         <div class="w-full h-full">
             <div
                 id="bg-layer"
-                class="w-full h-full absolute inset-0 bg-no-repeat brightness-[20%] bg-cover"
+                class="w-full h-full absolute inset-0 bg-no-repeat brightness-[20%] bg-cover z-10"
             >
-                <Profile />
+                <Profile v-if="openProfile" />
             </div>
 
             <div
-                v-if="flashlightState"
                 id="flashlight"
-                class="w-full h-full absolute inset-0 bg-no-repeat bg-cover"
+                class="w-full h-full absolute inset-0 bg-no-repeat flex gap-4 bg-cover"
             >
-                <Profile />
+                <Profile v-if="openProfile" />
             </div>
 
             <div class="absolute top-0 left-0 z-30 p-4 m-2">
                 <ul class="flex gap-5">
                     <li class="text-white cursor-pointer">Phone</li>
-                    <li @click.prevent="handleFlashlight" class="text-white cursor-pointer">Flashlight</li>
                 </ul>
             </div>
         </div>

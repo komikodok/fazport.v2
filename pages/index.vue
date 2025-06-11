@@ -8,9 +8,9 @@ const endSectionRef = useTemplateRef<(HTMLDivElement)>('end-section');
 gsap.registerPlugin(ScrollTrigger)
 
 onMounted(() => {
-  const isSmallScreen = window.innerWidth < 640 
+  // const isSmallScreen = window.innerWidth < 640 
 
-  const yValue = isSmallScreen ? -30 : -70
+  // const yValue = isSmallScreen ? -30 : -70
 
   const tl = gsap.timeline({
     scrollTrigger: {
@@ -53,13 +53,13 @@ onMounted(() => {
   })
   .to('#forest', {
     x: 100,
-    y: yValue,
+    y: -50,
     ease: 'power2.inOut',
     filter: 'blur(0px) brightness(1)',
   })
   .to('#forest', {
     x: -100,
-    y: yValue,
+    y: -50,
     ease: 'power2.inOut',
     filter: 'blur(0px) brightness(1)',
   })
@@ -88,12 +88,11 @@ function handleClick() {
   })
 
   .to('#wrapper', {
-    filter: 'blur(10px) brightness(0)',
+    filter: 'blur(4px) brightness(0)',
+    onComplete: () => {
+      navigateTo('/about')
+    }
   })
-
-  .add(() => {
-    navigateTo('/about')
-  });
 }
 
 </script>
@@ -103,7 +102,7 @@ function handleClick() {
   <div id="wrapper" class="w-screen h-screen overflow-hidden relative">
     <div 
       id="forest" 
-      class="w-full h-[100vh] flex flex-col items-center justify-center gap-6 absolute inset-0 bg-no-repeat bg-cover blur-[6px] brightness-[60%] pointer-events-none"
+      class="w-full h-[100vh] flex flex-col items-center justify-center gap-6 absolute inset-0 bg-no-repeat bg-cover blur-[2px] brightness-[60%] pointer-events-none"
     >
       <strong id="welcome" class="text-white text-8xl opacity-0">W e l c o m e</strong>
 
@@ -148,5 +147,6 @@ function handleClick() {
 
 #forest {
   background-image: url('/forest.jpeg');
+  background-position: center;
 }
 </style>
