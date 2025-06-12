@@ -11,7 +11,8 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       Poppins: [400, 600],
-      Lobster: true
+      Lobster: true,
+      Cinzel: true
     },
     display: 'swap',
   },

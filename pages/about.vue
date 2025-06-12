@@ -20,19 +20,27 @@ onMounted(() => {
     .to(['#bg-layer', '#flashlight'], {
         backgroundPositionY: '100%',
         duration: 5,
-        ease: 'power1'
+        ease: 'power3'
     })
-    .to('#bg-layer', { 
-        zIndex: 0,
-        onComplete: () => {
-            openProfile.value = true
-        }
-     })
+    .add([
+        gsap.to('#flashlight', {
+            clipPath: `circle(100px at 50px 50px)`,
+            filter: 'blur(0px) brightness(1)',
+            ease: 'power4'
+        }),
+        gsap.to('#bg-layer', { 
+            zIndex: 0,
+            onComplete: () => {
+                openProfile.value = true
+            }
+        })
+    ])
     .to(['#bg-layer', '#flashlight'], {
         backgroundPositionY: '50%',
         duration: 5,
-        ease: 'power1'
+        ease: 'power3'
     })
+    .to('#profile-content', { opacity: 1, ease: 'power1' })
 })
 
 function handleMouseMove(e: MouseEvent) {
@@ -61,7 +69,12 @@ function handleMouseMove(e: MouseEvent) {
                 id="flashlight"
                 class="w-full h-full absolute inset-0 bg-no-repeat flex gap-4 bg-cover"
             >
-                <Profile v-if="openProfile" />
+                <Profile v-if="openProfile">
+                    <div class="opacity-0 w-[85%] h-[70%] translate-y-2 flex gap-3 items-center justify-between">
+                        <div style="background-image: url('/photo-profile.jpeg');" class="flex-shrink-0 bg-cover w-36 h-36"/>
+                        <p id="profile-content" class="text-center text-[#7a7067] font-bold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti facere provident? Amet perspiciatis ratione aut rem eveniet? Dolorum maiores veritatis doloribus aliquid quibusdam repellat nam nemo odio nobis libero.</p>
+                    </div>
+                </Profile>
             </div>
 
             <div class="absolute top-0 left-0 z-30 p-4 m-2">
@@ -80,7 +93,10 @@ function handleMouseMove(e: MouseEvent) {
 
 #flashlight {
     background-image: url('/forest2.jpeg');
-    clip-path: circle('100px at 0px 0px');
     filter: blur(0) brightness(1);
+}
+
+#profile-content {
+    font-family: Cinzel;
 }
 </style>
