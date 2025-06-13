@@ -4,25 +4,20 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import Profile from '~/components/Profile.vue'
 
-const openProfile = ref<boolean>(false)
+const openProfile = ref<boolean>(true)
 
 gsap.registerPlugin(ScrollTrigger)
 
 onMounted(() => {
     const tl = gsap.timeline()
-    tl.fromTo('#wrapper', 
-        { filter: 'blur(0px) brightness(0.1)', },
-        { 
-            filter: 'blur(0px) brightness(1)',
-            ease: 'power1.in'
-        }
-    )
-    .to(['#bg-layer', '#flashlight'], {
-        backgroundPositionY: '100%',
-        duration: 5,
-        ease: 'power3'
-    })
-    .add([
+    tl.add([
+        gsap.fromTo('#wrapper', 
+            { filter: 'blur(0px) brightness(0.1)', },
+            { 
+                filter: 'blur(0px) brightness(1)',
+                ease: 'power1.in'
+            }
+        ),
         gsap.to('#flashlight', {
             clipPath: `circle(100px at 50px 50px)`,
             filter: 'blur(0px) brightness(1)',
@@ -30,17 +25,21 @@ onMounted(() => {
         }),
         gsap.to('#bg-layer', { 
             zIndex: 0,
-            onComplete: () => {
-                openProfile.value = true
-            }
+            // onComplete: () => {
+            //     openProfile.value = true
+            // }
         })
     ])
+    .to(['#bg-layer', '#flashlight'], {
+        backgroundPositionY: '100%',
+        duration: 5,
+        ease: 'power3'
+    })
     .to(['#bg-layer', '#flashlight'], {
         backgroundPositionY: '50%',
         duration: 5,
         ease: 'power3'
     })
-    .to('#profile-content', { opacity: 1, ease: 'power1' })
 })
 
 function handleMouseMove(e: MouseEvent) {
@@ -62,18 +61,18 @@ function handleMouseMove(e: MouseEvent) {
                 id="bg-layer"
                 class="w-full h-full absolute inset-0 bg-no-repeat brightness-[20%] bg-cover z-10"
             >
-                <Profile v-if="openProfile" />
+                <Profile :open-profile="openProfile" @is-open="(state: boolean) => openProfile = state" />
             </div>
 
             <div
                 id="flashlight"
                 class="w-full h-full absolute inset-0 bg-no-repeat flex gap-4 bg-cover"
             >
-                <Profile v-if="openProfile">
-                    <div class="opacity-0 w-[85%] h-[70%] translate-y-2 flex gap-3 items-center justify-between">
+                <Profile :open-profile="openProfile" @is-open="(state: boolean) => openProfile = state">
+                    <template #profile-content>
                         <div style="background-image: url('/photo-profile.jpeg');" class="flex-shrink-0 bg-cover w-36 h-36"/>
-                        <p id="profile-content" class="text-center text-[#7a7067] font-bold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti facere provident? Amet perspiciatis ratione aut rem eveniet? Dolorum maiores veritatis doloribus aliquid quibusdam repellat nam nemo odio nobis libero.</p>
-                    </div>
+                        <p class="text-center text-[#7a7067] font-bold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti facere provident? Amet perspiciatis ratione aut rem eveniet? Dolorum maiores veritatis doloribus aliquid quibusdam repellat nam nemo odio nobis libero.</p>
+                    </template>
                 </Profile>
             </div>
 
