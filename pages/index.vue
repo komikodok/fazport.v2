@@ -2,16 +2,21 @@
 import { onMounted } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 const endSectionRef = useTemplateRef<(HTMLDivElement)>('end-section');
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
 onMounted(() => {
   // const isSmallScreen = window.innerWidth < 640 
 
   // const yValue = isSmallScreen ? -30 : -70
-
+  ScrollSmoother.create({
+    smooth: 4,
+    effects: true
+  })
+  
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: '#wrapper',

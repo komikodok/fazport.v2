@@ -6,7 +6,7 @@ const { openProfile } = defineProps<{
 }>()
 
 const emit = defineEmits<{
-    (e: 'profile-state', state: boolean): void
+    (e: 'is-open'): void
 }>()
 
 onMounted(() => {
@@ -16,7 +16,7 @@ onMounted(() => {
         right: '50%',
         bottom: '50%',
         scale: 1,
-        rotate: 360,
+        rotate: '+=360',
         ease: 'power1.in',
     })
     .to('#scroll-paper', {
@@ -28,6 +28,7 @@ onMounted(() => {
 })
 
 function handleClick() {
+    emit('is-open')
     if (openProfile) {
         const tl = gsap.timeline()
         tl.to('#profile-content', { opacity: 0, ease: 'power1' })
@@ -40,7 +41,7 @@ function handleClick() {
             right: '80px',
             bottom: '32px',
             scale: 0.2,
-            rotate: 360,
+            rotate: '-=360',
             ease: 'power1.in',
         })
     } else {
@@ -50,7 +51,7 @@ function handleClick() {
             right: '50%',
             bottom: '50%',
             scale: 1,
-            rotate: 360,
+            rotate: '+=360',
             ease: 'power1.in',
         })
         .to('#scroll-paper', {
