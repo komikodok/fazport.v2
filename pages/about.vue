@@ -3,6 +3,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import Profile from '~/components/Profile.vue'
+import Skills from '~/components/Skills.vue'
 
 const openProfile = ref<boolean>(true)
 
@@ -67,7 +68,7 @@ function handleTouchMove(e: TouchEvent) {
         @mousemove="handleMouseMove" 
         @touchmove="handleTouchMove"
         id="wrapper" 
-        class="relative w-screen h-screen overflow-x-hidden"
+        class="relative w-screen h-screen overflow-hidden"
     >
         
         <div class="w-full h-full">
@@ -75,14 +76,16 @@ function handleTouchMove(e: TouchEvent) {
                 id="bg-layer"
                 class="w-full h-full absolute inset-0 bg-no-repeat brightness-[20%] bg-cover z-10"
             >
-                <Profile :open-profile="openProfile" @is-open="() => openProfile = !openProfile" />
+                <Skills />
+                <!-- <Profile :open-profile="openProfile" @is-open="() => openProfile = !openProfile" /> -->
             </div>
 
             <div
                 id="flashlight"
                 class="w-full h-full absolute inset-0 bg-no-repeat flex gap-4 bg-cover"
             >
-                <Profile :open-profile="openProfile" @is-open="() => openProfile = !openProfile">
+                <Skills />
+                <!-- <Profile :open-profile="openProfile" @is-open="() => openProfile = !openProfile">
                     <template #profile-content>
                         <div style="background-image: url('/photo-profile.jpeg');" class="flex-shrink-0 bg-cover w-36 h-36"/>
                         <p class="text-center text-sm text-[#7a7067] font-bold">
@@ -92,7 +95,7 @@ function handleTouchMove(e: TouchEvent) {
                             bridging functionality and design to deliver seamless digital experiences.
                         </p>
                     </template>
-                </Profile>
+                </Profile> -->
             </div>
 
             <div class="absolute top-0 left-0 z-30 p-4 m-2">

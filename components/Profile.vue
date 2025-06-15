@@ -15,6 +15,8 @@ onMounted(() => {
         opacity: 1,
         right: '50%',
         bottom: '50%',
+        x: '50%',
+        y: '50%',
         scale: 1,
         rotate: '+=360',
         ease: 'power1.in',
