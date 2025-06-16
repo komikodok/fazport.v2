@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import Profile from '~/components/Profile.vue'
 import Skills from '~/components/Skills.vue'
+import { SkillsContent, ProfileContent } from '#components'
 
 const openProfile = ref<boolean>(true)
 
@@ -74,28 +75,28 @@ function handleTouchMove(e: TouchEvent) {
         <div class="w-full h-full">
             <div
                 id="bg-layer"
+                style="background-image: url('/forest2.jpeg');"
                 class="w-full h-full absolute inset-0 bg-no-repeat brightness-[20%] bg-cover z-10"
             >
                 <Skills />
-                <!-- <Profile :open-profile="openProfile" @is-open="() => openProfile = !openProfile" /> -->
+                <Profile :open-profile="openProfile" @is-open="() => openProfile = !openProfile" />
             </div>
 
             <div
                 id="flashlight"
-                class="w-full h-full absolute inset-0 bg-no-repeat flex gap-4 bg-cover"
+                style="background-image: url('/forest2.jpeg');"
+                class="w-full h-full absolute inset-0 bg-no-repeat brightness-100 flex gap-4 bg-cover"
             >
-                <Skills />
-                <!-- <Profile :open-profile="openProfile" @is-open="() => openProfile = !openProfile">
-                    <template #profile-content>
-                        <div style="background-image: url('/photo-profile.jpeg');" class="flex-shrink-0 bg-cover w-36 h-36"/>
-                        <p class="text-center text-sm text-[#7a7067] font-bold">
-                            Fullstack Developer<br />
-                            I'm a fullstack developer with a strong emphasis on frontend engineering.<br />
-                            I specialize in crafting responsive, accessible, and visually engaging user interfaces —<br />
-                            bridging functionality and design to deliver seamless digital experiences.
-                        </p>
+                <Skills>
+                    <template #skills-content>
+                        <SkillsContent />
                     </template>
-                </Profile> -->
+                </Skills>
+                <Profile :open-profile="openProfile" @is-open="() => openProfile = !openProfile">
+                    <template #profile-content>
+                      <ProfileContent />
+                    </template>
+                </Profile>
             </div>
 
             <div class="absolute top-0 left-0 z-30 p-4 m-2">
@@ -108,16 +109,7 @@ function handleTouchMove(e: TouchEvent) {
 </template>
 
 <style>
-#bg-layer {
-    background-image: url('/forest2.jpeg');
-}
-
-#flashlight {
-    background-image: url('/forest2.jpeg');
-    filter: blur(0) brightness(1);
-}
-
-#profile-content {
+* {
     font-family: Cinzel;
 }
 </style>

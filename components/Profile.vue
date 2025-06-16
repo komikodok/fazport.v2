@@ -73,7 +73,6 @@ function handleClick() {
     <div 
         @click.prevent="handleClick"
         id="scroll-paper"
-        ref="scroll-paper"
         style="background-image: url('/scroll-paper.png');" 
         class="bg-no-repeat bg-cover max-w-xl w-full h-[120px] flex justify-center items-center opacity-50 scale-20 absolute bottom-8 right-20 translate-x-1/2 translate-y-1/2 z-10"
     >
@@ -83,7 +82,7 @@ function handleClick() {
             class="cursor-pointer absolute bg-cover -bottom-5 w-full h-14" 
         />
 
-        <div id="profile-content" class="w-[85%] h-[70%] opacity-0 translate-y-3 flex gap-3 items-center justify-between">
+        <div id="profile-content" class="w-[85%] h-[70%] opacity-0 text-[#7a7067] translate-y-3 flex gap-3 items-center justify-between">
             <slot name="profile-content"/>
         </div>
     </div>

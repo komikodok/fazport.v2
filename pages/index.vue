@@ -107,7 +107,8 @@ function handleClick() {
   <div id="wrapper" class="w-screen h-screen overflow-hidden relative">
     <div 
       id="forest" 
-      class="w-full h-[100vh] flex flex-col items-center justify-center gap-6 absolute inset-0 bg-no-repeat bg-cover blur-[2px] brightness-[60%] pointer-events-none"
+      style="background-image: url('/forest.jpeg');"
+      class="w-full h-[100vh] flex flex-col bg-center items-center justify-center gap-6 absolute inset-0 bg-no-repeat bg-cover blur-[2px] brightness-[60%] pointer-events-none"
     >
       <strong id="welcome" class="text-white text-8xl opacity-0">W e l c o m e</strong>
 
@@ -121,8 +122,8 @@ function handleClick() {
     </div>
 
     <div class="absolute inset-0 w-full h-full pointer-events-none">
-      <img id="tree-right" src="/tree-right.png" alt="Tree1" class="object-cover h-full absolute -right-62 max-lg:hidden blur-[1px] scale-120 brightness-[7%] z-10">
-      <img id="tree-left" src="/tree-left.png" alt="Tree2" class="object-cover h-full absolute -left-62 max-lg:-left-96 blur-[1px] scale-120 brightness-[7%] z-10">
+      <img id="tree-right" src="/tree-right.png" alt="Tree1" class="object-cover h-full absolute -right-64 max-lg:hidden blur-[1px] scale-120 brightness-[7%] z-10">
+      <img id="tree-left" src="/tree-left.png" alt="Tree2" class="object-cover h-full absolute -left-64 max-lg:-left-96 blur-[1px] scale-120 brightness-[7%] z-10">
     </div> 
 
     <div class="absolute bottom-0 right-1/2 opacity-80 animate-bounce flex flex-col gap-3 justify-center items-center translate-x-1/2 my-3">
@@ -148,10 +149,5 @@ function handleClick() {
 
 #enter {
   font-family: Poppins;
-}
-
-#forest {
-  background-image: url('/forest.jpeg');
-  background-position: center;
 }
 </style>
