@@ -10,71 +10,53 @@ const emit = defineEmits<{
 }>()
 
 onMounted(() => {
-    const tl = gsap.timeline()
-    tl.to('#scroll-paper', {
-        opacity: 1,
-        right: '50%',
-        bottom: '50%',
-        x: '50%',
-        y: '50%',
-        scale: 1,
-        rotate: '+=360',
-        ease: 'power1.in',
-    })
-    .to('#scroll-paper', {
-        delay: 0.4,
-        height: '290px',
-        ease: 'power4'
-    })
-    .to('#profile-content', { opacity: 1, ease: 'power1' })
+    watch(() => openProfile, () => {
+        if (openProfile) {
+            const tl = gsap.timeline()
+            tl.to('#scroll-paper', {
+                opacity: 1,
+                right: '50%',
+                top: '50%',
+                x: '50%',
+                y: '-50%',
+                scale: 1,
+                rotate: 360,
+                ease: 'power1.in',
+            })
+            .to('#scroll-paper', {
+                delay: 0.4,
+                height: '290px',
+                ease: 'power4'
+            })
+            .to('#profile-content', { opacity: 1, ease: 'power1' })
+        } else {
+            const tl = gsap.timeline()
+            tl.to('#profile-content', { opacity: 0, ease: 'power1' })
+            .to('#scroll-paper', {
+                height: '120px',
+                ease: 'power4'
+            })
+            .to('#scroll-paper', {
+                opacity: 1,
+                scale: 0.5,
+                top: '160px',
+                right: 20,
+                x: '50%',
+                y: '-50%',
+                rotate: 300,
+                ease: 'power1.in',
+            })
+        }
+    }, { immediate: true })
 })
-
-function handleClick() {
-    emit('is-open')
-    if (openProfile) {
-        const tl = gsap.timeline()
-        tl.to('#profile-content', { opacity: 0, ease: 'power1' })
-        .to('#scroll-paper', {
-            height: '120px',
-            ease: 'power4'
-        })
-        .to('#scroll-paper', {
-            opacity: 0.5,
-            right: '80px',
-            bottom: '32px',
-            scale: 0.2,
-            rotate: '-=360',
-            ease: 'power1.in',
-        })
-    } else {
-        const tl = gsap.timeline()
-        tl.to('#scroll-paper', {
-            opacity: 1,
-            right: '50%',
-            bottom: '50%',
-            scale: 1,
-            rotate: '+=360',
-            ease: 'power1.in',
-        })
-        .to('#scroll-paper', {
-            delay: 0.4,
-            height: '290px',
-            ease: 'power4'
-        })
-        .to('#profile-content', { 
-            opacity: 1, 
-            ease: 'power1',
-        })
-    }
-}
 </script>
 
 <template>
     <div 
-        @click.prevent="handleClick"
+        @click.prevent="emit('is-open')"
         id="scroll-paper"
         style="background-image: url('/scroll-paper.png');" 
-        class="bg-no-repeat bg-cover max-w-xl w-full h-[120px] flex justify-center items-center opacity-50 scale-20 absolute bottom-8 right-20 translate-x-1/2 translate-y-1/2 z-10"
+        class="bg-no-repeat bg-cover max-w-xl w-full h-[120px] flex justify-center items-center scale-10 opacity-0 absolute bottom-0 right-0 z-10"
     >
         <div 
             id="scroll"
@@ -83,7 +65,7 @@ function handleClick() {
         />
 
         <div id="profile-content" class="w-[85%] h-[70%] opacity-0 text-[#7a7067] translate-y-3 flex gap-3 items-center justify-between">
-            <slot name="profile-content"/>
+            <slot name="profile-content" />
         </div>
     </div>
 </template>

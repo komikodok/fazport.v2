@@ -6,7 +6,8 @@ import Profile from '~/components/Profile.vue'
 import Skills from '~/components/Skills.vue'
 import { SkillsContent, ProfileContent } from '#components'
 
-const openProfile = ref<boolean>(true)
+const openProfile = ref<boolean>(false)
+const openSkills = ref<boolean>(false)
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -78,7 +79,7 @@ function handleTouchMove(e: TouchEvent) {
                 style="background-image: url('/forest2.jpeg');"
                 class="w-full h-full absolute inset-0 bg-no-repeat brightness-[20%] bg-cover z-10"
             >
-                <Skills />
+                <Skills :open-skills="openSkills" @is-open="() => openSkills = !openSkills" />
                 <Profile :open-profile="openProfile" @is-open="() => openProfile = !openProfile" />
             </div>
 
@@ -87,7 +88,7 @@ function handleTouchMove(e: TouchEvent) {
                 style="background-image: url('/forest2.jpeg');"
                 class="w-full h-full absolute inset-0 bg-no-repeat brightness-100 flex gap-4 bg-cover"
             >
-                <Skills>
+                <Skills :open-skills="openSkills" @is-open="() => openSkills = !openSkills">
                     <template #skills-content>
                         <SkillsContent />
                     </template>
