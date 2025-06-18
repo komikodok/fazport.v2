@@ -5,13 +5,23 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Profile from '~/components/Profile.vue'
 import Skills from '~/components/Skills.vue'
 import { SkillsContent, ProfileContent } from '#components'
+import Notif from '~/components/Notif.vue'
 
-const openProfile = ref<boolean>(false)
+const openProfile = ref<boolean>(true)
 const openSkills = ref<boolean>(false)
 
 gsap.registerPlugin(ScrollTrigger)
 
 onMounted(() => {
+    setTimeout(() => {
+        openProfile.value = false
+        openSkills.value = true
+
+        setTimeout(() => {
+            openSkills.value = false
+        }, 2000)
+    }, 2000)
+
     const tl = gsap.timeline()
     tl.add([
         gsap.fromTo('#wrapper', 
@@ -72,7 +82,6 @@ function handleTouchMove(e: TouchEvent) {
         id="wrapper" 
         class="relative w-screen h-screen overflow-hidden"
     >
-        
         <div class="w-full h-full">
             <div
                 id="bg-layer"

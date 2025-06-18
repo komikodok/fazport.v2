@@ -12,6 +12,8 @@ const emit = defineEmits<{
 onMounted(() => {
     watch(() => openSkills, () => {
         if (openSkills) {
+            gsap.killTweensOf('#scroll-paper2')
+            
             const tl = gsap.timeline()
             tl.to('#scroll-paper2', {
                 opacity: 1,
@@ -38,13 +40,20 @@ onMounted(() => {
             })
             .to('#scroll-paper2', {
                 opacity: 1,
-                scale: 0.5,
-                top: '300px',
-                right: 0,
+                scale: 0.1,
+                top: 40,
+                right: 80,
                 x: '50%',
                 y: '-50%',
-                rotate: 300,
+                rotate: 280,
+                yoyo: true,
                 ease: 'power1.in',
+            })
+            .to('#scroll-paper2', {
+                rotation: '+=8',
+                repeat: -1,
+                yoyo: true,
+                ease: 'sine.inOut'
             })
         }
     }, { immediate: true })

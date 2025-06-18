@@ -9,9 +9,9 @@ const endSectionRef = useTemplateRef<(HTMLDivElement)>('end-section');
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
 onMounted(() => {
-  // const isSmallScreen = window.innerWidth < 640 
+  const isSmallScreen = window.innerWidth < 640 
 
-  // const yValue = isSmallScreen ? -30 : -70
+  const yValue = isSmallScreen ? -30 : -70
   ScrollSmoother.create({
     smooth: 4,
     effects: true
@@ -51,7 +51,7 @@ onMounted(() => {
     immediateRender: false,
   }, '<')
   .to('#forest', {
-    scale: 1.2,
+    scale: 1.5,
     filter: 'blur(1px) brightness(0.8)',
     ease: 'power2.out',
     immediateRender: false,
@@ -110,7 +110,7 @@ function handleClick() {
       style="background-image: url('/forest.jpeg');"
       class="w-full h-[100vh] flex flex-col bg-center items-center justify-center gap-6 absolute inset-0 bg-no-repeat bg-cover blur-[2px] brightness-[60%] pointer-events-none"
     >
-      <strong id="welcome" class="text-white text-8xl opacity-0">W e l c o m e</strong>
+      <strong id="welcome" class="text-white text-7xl opacity-0">W e l c o m e</strong>
 
       <button 
         @click.prevent="handleClick" 
