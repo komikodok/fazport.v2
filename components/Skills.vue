@@ -65,7 +65,7 @@ onMounted(() => {
         @click="emit('is-open')"
         id="scroll-paper2"
         style="background-image: url('/scroll-paper2.png');"
-        class="bg-no-repeat bg-cover max-w-xl w-full h-[120px] flex justify-center items-center scale-10 opacity-0 absolute bottom-0 right-0 z-10"
+        class="cursor-pointer bg-no-repeat bg-cover max-w-xl w-full h-[120px] flex justify-center items-center scale-10 opacity-0 absolute bottom-0 right-0 z-10"
     >
         <div 
             id="scroll"

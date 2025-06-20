@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import Profile from '~/components/Profile.vue'
 import Skills from '~/components/Skills.vue'
-import { SkillsContent, ProfileContent } from '#components'
+import { SkillsContent, ProfileContent, Phone } from '#components'
 import Notif from '~/components/Notif.vue'
 
 const openProfile = ref<boolean>(true)
@@ -19,7 +19,7 @@ onMounted(() => {
 
         setTimeout(() => {
             openSkills.value = false
-        }, 2000)
+        }, 2300)
     }, 2000)
 
     const tl = gsap.timeline()
@@ -45,10 +45,21 @@ onMounted(() => {
         duration: 5,
         ease: 'power3',
     })
-    .to(['#bg-layer', '#flashlight'], {
-        backgroundPositionY: '30%',
-        duration: 5,
-        ease: 'power3'
+    .add([
+        gsap.to(['#bg-layer', '#flashlight'], {
+            backgroundPositionY: '30%',
+            duration: 5,
+            ease: 'power3',
+        }),
+        gsap.to('#notif', {
+            opacity: 1,
+            ease: 'power2.inOut'
+        }),
+    ])
+    .to('#notif', {
+            opacity: 0,
+            display: 'none',
+            ease: 'power2.inOut'
     })
 })
 
@@ -82,11 +93,20 @@ function handleTouchMove(e: TouchEvent) {
         id="wrapper" 
         class="relative w-screen h-screen overflow-hidden"
     >
+        <Notif id="notif" class="opacity-0">
+            <div class="flex flex-col gap-2">
+                <p class="text-sm text-yellow-200">Item Acquired</p>
+                <p class="text-xl font-bold text-white typing-text">You got 2 vintage scrolls!</p>
+            </div>
+        </Notif>
+
+        <!-- <Phone /> -->
+
         <div class="w-full h-full">
             <div
                 id="bg-layer"
                 style="background-image: url('/forest2.jpeg');"
-                class="w-full h-full absolute inset-0 bg-no-repeat brightness-[20%] bg-cover z-10"
+                class="w-full h-full absolute inset-0 bg-center bg-no-repeat brightness-[20%] bg-cover z-10"
             >
                 <Skills :open-skills="openSkills" @is-open="() => openSkills = !openSkills" />
                 <Profile :open-profile="openProfile" @is-open="() => openProfile = !openProfile" />
@@ -95,7 +115,7 @@ function handleTouchMove(e: TouchEvent) {
             <div
                 id="flashlight"
                 style="background-image: url('/forest2.jpeg');"
-                class="w-full h-full absolute inset-0 bg-no-repeat brightness-100 flex gap-4 bg-cover"
+                class="w-full h-full absolute inset-0 bg-center bg-no-repeat brightness-100 flex gap-4 bg-cover"
             >
                 <Skills :open-skills="openSkills" @is-open="() => openSkills = !openSkills">
                     <template #skills-content>
@@ -111,7 +131,7 @@ function handleTouchMove(e: TouchEvent) {
 
             <div class="absolute top-0 left-0 z-30 p-4 m-2">
                 <ul class="flex gap-5">
-                    <li class="text-white cursor-pointer">Phone</li>
+                    <li class="text-white cursor-pointer">Menu</li>
                 </ul>
             </div>
         </div>

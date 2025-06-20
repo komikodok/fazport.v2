@@ -64,12 +64,12 @@ onMounted(() => {
         @click.prevent="emit('is-open')"
         id="scroll-paper"
         style="background-image: url('/scroll-paper.png');" 
-        class="bg-no-repeat bg-cover max-w-xl w-full h-[120px] flex justify-center items-center scale-10 opacity-0 absolute bottom-0 right-0 z-10"
+        class="cursor-pointer bg-no-repeat bg-cover max-w-xl w-full h-[120px] flex justify-center items-center scale-10 opacity-0 absolute bottom-0 right-0 z-10"
     >
         <div 
             id="scroll"
             style="background-image: url('/scroll.png');" 
-            class="cursor-pointer absolute bg-cover -bottom-5 w-full h-14" 
+            class="absolute bg-cover -bottom-5 w-full h-14" 
         />
 
         <div id="profile-content" class="w-[85%] h-[70%] opacity-0 text-[#7a7067] translate-y-3 flex gap-3 items-center justify-between">

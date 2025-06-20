@@ -44,7 +44,7 @@ onMounted(() => {
   }, '<')
   .to('#tree-right', {
     x: 400,
-    scale: 1.5,
+    scale: 1.3,
     opacity: 0,
     ease: 'power1.inOut',
     filter: 'blur(1px) brightness(0.5)',
