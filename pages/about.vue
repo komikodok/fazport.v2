@@ -4,8 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import Profile from '~/components/Profile.vue'
 import Skills from '~/components/Skills.vue'
-import { SkillsContent, ProfileContent, Phone } from '#components'
-import Notif from '~/components/Notif.vue'
+import { SkillsContent, ProfileContent } from '#components'
 
 const openProfile = ref<boolean>(true)
 const openSkills = ref<boolean>(false)
@@ -53,11 +52,13 @@ onMounted(() => {
         }),
         gsap.to('#notif', {
             opacity: 1,
-            ease: 'power2.inOut'
+            scale: 1,
+            ease: "back.out(1.7)"
         }),
     ])
     .to('#notif', {
             opacity: 0,
+            scale: 0.9,
             display: 'none',
             ease: 'power2.inOut'
     })
@@ -93,14 +94,12 @@ function handleTouchMove(e: TouchEvent) {
         id="wrapper" 
         class="relative w-screen h-screen overflow-hidden"
     >
-        <Notif id="notif" class="opacity-0">
-            <div class="flex flex-col gap-2">
-                <p class="text-sm text-yellow-200">Item Acquired</p>
-                <p class="text-xl font-bold text-white typing-text">You got 2 vintage scrolls!</p>
-            </div>
-        </Notif>
 
-        <!-- <Phone /> -->
+        <div id="notif" class="flex flex-col gap-2 px-4 py-2 scale-90 opacity-0 fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2">
+            <p class="text-sm text-yellow-200">Item Acquired</p>
+            <p class="text-xl font-bold text-white typing-text">You got 2 scroll parchments!</p>
+        </div>
+
 
         <div class="w-full h-full">
             <div

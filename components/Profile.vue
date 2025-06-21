@@ -12,10 +12,10 @@ const emit = defineEmits<{
 onMounted(() => {
     watch(() => openProfile, () => {
         if (openProfile) {
-            gsap.killTweensOf('#scroll-paper')
+            gsap.killTweensOf('#scroll-parchment')
 
             const tl = gsap.timeline()
-            tl.to('#scroll-paper', {
+            tl.to('#scroll-parchment', {
                 opacity: 1,
                 right: '50%',
                 top: '50%',
@@ -25,7 +25,7 @@ onMounted(() => {
                 rotate: 360,
                 ease: 'power1.in',
             })
-            .to('#scroll-paper', {
+            .to('#scroll-parchment', {
                 delay: 0.4,
                 height: '290px',
                 ease: 'power4'
@@ -34,11 +34,11 @@ onMounted(() => {
         } else {
             const tl = gsap.timeline()
             tl.to('#profile-content', { opacity: 0, ease: 'power1' })
-            .to('#scroll-paper', {
+            .to('#scroll-parchment', {
                 height: '120px',
                 ease: 'power4'
             })
-            .to('#scroll-paper', {
+            .to('#scroll-parchment', {
                 opacity: 1,
                 scale: 0.1,
                 top: 40,
@@ -48,7 +48,7 @@ onMounted(() => {
                 rotate: 280,
                 ease: 'power1.in',
             })
-            .to('#scroll-paper', {
+            .to('#scroll-parchment', {
                 rotation: '+=8',
                 repeat: -1,
                 yoyo: true,
@@ -62,8 +62,8 @@ onMounted(() => {
 <template>
     <div 
         @click.prevent="emit('is-open')"
-        id="scroll-paper"
-        style="background-image: url('/scroll-paper.png');" 
+        id="scroll-parchment"
+        style="background-image: url('/scroll-parchment.png');" 
         class="cursor-pointer bg-no-repeat bg-cover max-w-xl w-full h-[120px] flex justify-center items-center scale-10 opacity-0 absolute bottom-0 right-0 z-10"
     >
         <div 

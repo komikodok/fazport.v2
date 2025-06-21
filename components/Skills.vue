@@ -12,10 +12,10 @@ const emit = defineEmits<{
 onMounted(() => {
     watch(() => openSkills, () => {
         if (openSkills) {
-            gsap.killTweensOf('#scroll-paper2')
+            gsap.killTweensOf('#scroll-parchment2')
             
             const tl = gsap.timeline()
-            tl.to('#scroll-paper2', {
+            tl.to('#scroll-parchment2', {
                 opacity: 1,
                 right: '50%',
                 top: '50%',
@@ -25,7 +25,7 @@ onMounted(() => {
                 rotate: 360,
                 ease: 'power1.in',
             })
-            .to('#scroll-paper2', {
+            .to('#scroll-parchment2', {
                 delay: 0.4,
                 height: '580px',
                 ease: 'power4'
@@ -34,11 +34,11 @@ onMounted(() => {
         } else {
             const tl = gsap.timeline()
             tl.to('#skills-content', { opacity: 0, ease: 'power1' })
-            .to('#scroll-paper2', {
+            .to('#scroll-parchment2', {
                 height: '120px',
                 ease: 'power4'
             })
-            .to('#scroll-paper2', {
+            .to('#scroll-parchment2', {
                 opacity: 1,
                 scale: 0.1,
                 top: 40,
@@ -49,7 +49,7 @@ onMounted(() => {
                 yoyo: true,
                 ease: 'power1.in',
             })
-            .to('#scroll-paper2', {
+            .to('#scroll-parchment2', {
                 rotation: '+=8',
                 repeat: -1,
                 yoyo: true,
@@ -63,8 +63,8 @@ onMounted(() => {
 <template>
     <div
         @click="emit('is-open')"
-        id="scroll-paper2"
-        style="background-image: url('/scroll-paper2.png');"
+        id="scroll-parchment2"
+        style="background-image: url('/scroll-parchment2.png');"
         class="cursor-pointer bg-no-repeat bg-cover max-w-xl w-full h-[120px] flex justify-center items-center scale-10 opacity-0 absolute bottom-0 right-0 z-10"
     >
         <div 
