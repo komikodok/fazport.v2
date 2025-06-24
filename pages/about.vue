@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import Profile from '~/components/Profile.vue'
 import Skills from '~/components/Skills.vue'
+import Menu from '~/components/Menu.vue'
 import { SkillsContent, ProfileContent } from '#components'
 
 const openProfile = ref<boolean>(true)
@@ -109,6 +110,7 @@ function handleTouchMove(e: TouchEvent) {
             >
                 <Skills :open-skills="openSkills" @is-open="() => openSkills = !openSkills" />
                 <Profile :open-profile="openProfile" @is-open="() => openProfile = !openProfile" />
+                <Menu />
             </div>
 
             <div
@@ -126,6 +128,7 @@ function handleTouchMove(e: TouchEvent) {
                       <ProfileContent />
                     </template>
                 </Profile>
+                <Menu />
             </div>
 
             <div class="absolute top-0 left-0 z-30 p-4 m-2">
