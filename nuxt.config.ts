@@ -12,7 +12,8 @@ export default defineNuxtConfig({
     families: {
       Poppins: [400, 600],
       Lobster: true,
-      Cinzel: true
+      Cinzel: true,
+      'Pirata One': true,
     },
     display: 'swap',
   },

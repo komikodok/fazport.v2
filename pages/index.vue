@@ -51,7 +51,7 @@ onMounted(() => {
     immediateRender: false,
   }, '<')
   .to('#forest', {
-    scale: 1.5,
+    scale: 1.4,
     filter: 'blur(1px) brightness(0.8)',
     ease: 'power2.out',
     immediateRender: false,
