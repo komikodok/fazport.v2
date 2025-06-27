@@ -17,10 +17,8 @@ onMounted(() => {
             const tl = gsap.timeline()
             tl.to('#scroll-parchment2', {
                 opacity: 1,
-                right: '50%',
                 top: '50%',
-                x: '50%',
-                y: '-50%',
+                right: '50%',
                 scale: 1,
                 rotate: 360,
                 ease: 'power1.in',
@@ -43,8 +41,6 @@ onMounted(() => {
                 scale: 0.1,
                 top: 40,
                 right: 80,
-                x: '50%',
-                y: '-50%',
                 rotate: 280,
                 yoyo: true,
                 ease: 'power1.in',
@@ -65,7 +61,7 @@ onMounted(() => {
         @click="emit('is-open')"
         id="scroll-parchment2"
         style="background-image: url('/scroll-parchment2.png');"
-        class="cursor-pointer bg-no-repeat bg-cover max-w-xl w-full h-[120px] flex justify-center items-center scale-10 opacity-0 absolute bottom-0 right-0 z-10"
+        class="cursor-pointer bg-no-repeat bg-cover max-w-xl w-full h-[120px] flex justify-center items-center translate-x-1/2 -translate-y-1/2 scale-10 opacity-0 absolute bottom-0 right-0 z-10"
     >
         <div 
             id="scroll"

@@ -130,12 +130,6 @@ function handleTouchMove(e: TouchEvent) {
                 </Profile>
                 <Menu />
             </div>
-
-            <div class="absolute top-0 left-0 z-30 p-4 m-2">
-                <ul class="flex gap-5">
-                    <li class="text-white cursor-pointer">Menu</li>
-                </ul>
-            </div>
         </div>
     </div>
 </template>
