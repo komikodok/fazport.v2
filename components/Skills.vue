@@ -12,10 +12,11 @@ const emit = defineEmits<{
 onMounted(() => {
     watch(() => openSkills, () => {
         if (openSkills) {
-            gsap.killTweensOf('#scroll-parchment2')
+            gsap.killTweensOf(['#scroll-parchment2', '#text-parchment2'])
             
             const tl = gsap.timeline()
-            tl.to('#scroll-parchment2', {
+            tl.to('#text-parchment2', { opacity: 0, ease: 'sine.inOut' })
+            .to('#scroll-parchment2', {
                 opacity: 1,
                 top: '50%',
                 right: '50%',
@@ -40,9 +41,8 @@ onMounted(() => {
                 opacity: 1,
                 scale: 0.1,
                 top: 40,
-                right: 80,
+                right: 140,
                 rotate: 280,
-                yoyo: true,
                 ease: 'power1.in',
             })
             .to('#scroll-parchment2', {
@@ -51,6 +51,13 @@ onMounted(() => {
                 yoyo: true,
                 ease: 'sine.inOut'
             })
+            .to('#text-parchment2', { opacity: 1, ease: 'sine.inOut' })
+            .to('#text-parchment2', { 
+                rotation: '+=4',
+                repeat: -1,
+                yoyo: true,
+                ease: 'sine.inOut'
+             })
         }
     }, { immediate: true })
 })
@@ -73,4 +80,17 @@ onMounted(() => {
             <slot name="skills-content"/>
         </div>
     </div>
+
+    <p 
+        id="text-parchment2"
+        class="absolute top-[70px] right-[100px] opacity-0 text-lg text-yellow-200"
+    >
+        Parchment 2
+    </p>
 </template>
+
+<style>
+#text-parchment2 {
+    font-family: 'Pirata One';
+}
+</style>

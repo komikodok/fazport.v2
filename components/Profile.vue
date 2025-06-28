@@ -12,10 +12,11 @@ const emit = defineEmits<{
 onMounted(() => {
     watch(() => openProfile, () => {
         if (openProfile) {
-            gsap.killTweensOf('#scroll-parchment')
+            gsap.killTweensOf(['#scroll-parchment', '#text-parchment'])
 
             const tl = gsap.timeline()
-            tl.to('#scroll-parchment', {
+            tl.to('#text-parchment', { opacity: 0, ease: 'sine.inOut' })
+            .to('#scroll-parchment', {
                 opacity: 1,
                 top: '50%',
                 right: '50%',
@@ -40,7 +41,7 @@ onMounted(() => {
                 opacity: 1,
                 scale: 0.1,
                 top: 40,
-                right: 20,
+                right: 40,
                 rotate: 280,
                 ease: 'power1.in',
             })
@@ -50,6 +51,13 @@ onMounted(() => {
                 yoyo: true,
                 ease: 'sine.inOut'
             })
+            .to('#text-parchment', { opacity: 1, ease: 'sine.inOut' })
+            .to('#text-parchment', { 
+                rotation: '+=4',
+                repeat: -1,
+                yoyo: true,
+                ease: 'sine.inOut'
+             })
         }
     }, { immediate: true })
 })
@@ -72,8 +80,17 @@ onMounted(() => {
             <slot name="profile-content" />
         </div>
     </div>
+
+    <p 
+        id="text-parchment"
+        class="absolute top-[70px] right-0 opacity-0 text-lg text-yellow-200"
+    >
+        Parchment 1
+    </p>
 </template>
 
 <style>
-
+#text-parchment {
+    font-family: 'Pirata One';
+}
 </style>

@@ -3,9 +3,11 @@ import gsap from 'gsap'
 
 import { menu } from '~/data/menu'
 
-const openMenu = ref<boolean>(true)
+const openMenu = ref<boolean>(false)
 
 const route = useRoute()
+
+let tl: gsap.core.Timeline | null = null
 
 onMounted(() => {
   const initPinPosition = menu.find((item) => item.path === route.path)
@@ -19,41 +21,57 @@ onMounted(() => {
   })
 
   watch(openMenu, () => {
-    console.log(openMenu.value)
-    if (openMenu.value) {        
-        const tl = gsap.timeline()
-        tl.to('#map', {
-            opacity: 1,
-            right: '50%',
-            top: '50%',
-            scale: 1,
-            ease: 'power1.in',
-        })
-        .to('#map', {
-          scale: 1.01,
-          repeat: -1,
-          yoyo: true,
-          ease: 'circ'
-        })
-      } else {
-        gsap.killTweensOf('#map')
+    if (openMenu.value) { 
+      gsap.killTweensOf('#map')
 
-        const tl = gsap.timeline()
-        tl.to('#map', {
+      tl = gsap.timeline()
+      tl.to('#text-menu', { opacity: 0, ease: 'sine.inOut' })
+      .to('#map', {
           opacity: 1,
-          scale: 0.15,
-          top: 40,
-          right: 200,
+          left: '50%',
+          top: '50%',
+          x: '-50%',
+          y: '-50%',
+          scale: 1,
+          rotate: 0,
           ease: 'power1.in',
-        })
-      }
+      })
+      .to('#map', {
+        scale: 1.005,
+        repeat: -1,
+        yoyo: true,
+        ease: 'power1'
+      })
+    } else {
+      gsap.killTweensOf('#map')
+
+      tl = gsap.timeline()
+      tl.to('#map', {
+        opacity: 1,
+        scale: 0.15,
+        top: -140,
+        left: -250,
+        x: 0,
+        y: 0,
+        ease: 'power1.in',
+      })
+      .to('#map', {
+        rotation: '+=4',
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      })
+      .to('#text-menu', { opacity: 1, ease: 'sine.inOut' })
+    }
   }, { immediate: true })
 })
 
 function handlePinPosition(e: MouseEvent) {
   const targetEl = e.currentTarget as HTMLElement
 
-  gsap.to('#map-pin', {
+  tl = gsap.timeline()
+
+  tl.to('#map-pin', {
     top: targetEl.offsetTop,
     left: targetEl.offsetLeft,
     width: targetEl.offsetWidth,
@@ -66,15 +84,17 @@ function handlePinPosition(e: MouseEvent) {
 
 <template>
   <div
-    @click="openMenu = !openMenu"
+    @click.prevent="openMenu = true"
     id="map"
     style="background-image: url('/map.png');"
-    class="bg-no-repeat bg-cover max-w-2xl w-full h-92 flex justify-center items-center absolute translate-x-1/2 -translate-y-1/2 z-10"
+    :class="openMenu ? 'pointer-events-none' : 'pointer-events-auto cursor-pointer'"
+    class="bg-no-repeat bg-cover max-w-2xl w-full h-92 flex scale-[15%] justify-center items-center absolute -top-[140px] -left-[250px] z-10"
   >
     <!-- Home -->
     <div 
       ref="home"
       @click.prevent="handlePinPosition"
+      :class="openMenu ? 'pointer-events-auto' : 'pointer-events-none'"
       class="cursor-pointer flex flex-col gap-2 justify-center items-center absolute top-[250px] left-[280px]"
     >
       <div class="w-2.5 h-2.5 rounded-full bg-black/60 shadow-md"></div>
@@ -85,6 +105,7 @@ function handlePinPosition(e: MouseEvent) {
     <div 
       ref="about"
       @click.prevent="handlePinPosition" 
+      :class="openMenu ? 'pointer-events-auto' : 'pointer-events-none'"
       class="cursor-pointer flex flex-col gap-2 justify-center items-center absolute top-[160px] left-[550px]"
     >
       <div class="w-2.5 h-2.5 rounded-full bg-black/60 shadow-md"></div>
@@ -95,6 +116,7 @@ function handlePinPosition(e: MouseEvent) {
     <div 
       ref="project"
       @click.prevent="handlePinPosition" 
+      :class="openMenu ? 'pointer-events-auto' : 'pointer-events-none'"
       class="cursor-pointer flex flex-col gap-2 justify-center items-center absolute top-[100px] left-[100px]"
     >
       <div class="w-2.5 h-2.5 rounded-full bg-black/60 shadow-md"></div>
@@ -111,11 +133,32 @@ function handlePinPosition(e: MouseEvent) {
       </svg>
     </div>
 
+    <!-- X Button -->
+    <div 
+      @click.prevent.stop="openMenu = false"
+      class="cursor-pointer pointer-events-auto absolute w-10 h-10 top-3 right-0 flex justify-center items-center"
+    >
+      <span class="text-5xl text-[#7a7067]">×</span>
+      <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+      </svg> -->
+    </div>
+
+    <p 
+      id="text-menu"
+      class="absolute -bottom-40 text-yellow-200 text-9xl"
+    >
+      Menu
+    </p>
   </div>
 </template>
 
 <style>
-h2 {
+#map {
+  font-family: 'Pirata One';
+}
+
+#text-menu {
   font-family: 'Pirata One';
 }
 </style>
