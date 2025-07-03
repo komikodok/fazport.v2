@@ -22,11 +22,11 @@ onMounted(() => {
 
   watch(openMenu, () => {
     if (openMenu.value) { 
-      gsap.killTweensOf('#map')
+      gsap.killTweensOf('#menu')
 
       tl = gsap.timeline()
       tl.to('#text-menu', { opacity: 0, ease: 'sine.inOut' })
-      .to('#map', {
+      .to('#menu', {
           opacity: 1,
           left: '50%',
           top: '50%',
@@ -36,17 +36,17 @@ onMounted(() => {
           rotate: 0,
           ease: 'power1.in',
       })
-      .to('#map', {
+      .to('#menu', {
         scale: 1.005,
         repeat: -1,
         yoyo: true,
         ease: 'power1'
       })
     } else {
-      gsap.killTweensOf('#map')
+      gsap.killTweensOf('#menu')
 
       tl = gsap.timeline()
-      tl.to('#map', {
+      tl.to('#menu', {
         opacity: 1,
         scale: 0.15,
         top: -140,
@@ -55,7 +55,7 @@ onMounted(() => {
         y: 0,
         ease: 'power1.in',
       })
-      .to('#map', {
+      .to('#menu', {
         rotation: '+=4',
         repeat: -1,
         yoyo: true,
@@ -66,8 +66,10 @@ onMounted(() => {
   }, { immediate: true })
 })
 
-function handlePinPosition(e: MouseEvent) {
+function handleClick(e: MouseEvent) {
   const targetEl = e.currentTarget as HTMLElement
+  const h2 = targetEl.querySelector('h2')
+  const textContent = h2?.textContent?.toLowerCase()
 
   tl = gsap.timeline()
 
@@ -76,7 +78,20 @@ function handlePinPosition(e: MouseEvent) {
     left: targetEl.offsetLeft,
     width: targetEl.offsetWidth,
     height: targetEl.offsetHeight,
-    ease: 'power1'
+    ease: 'power1',
+  })
+  .to(`#${textContent}`, {
+    filter: 'blur(4px) brightness(0)',
+    onComplete: () => {
+      setTimeout( () => {
+        if (textContent === 'home') {
+          navigateTo('/')
+        } else {
+          navigateTo(`/${textContent}`)
+        }
+        nextTick()
+      }, 10)
+    }
   })
 }
 
@@ -85,7 +100,7 @@ function handlePinPosition(e: MouseEvent) {
 <template>
   <div
     @click.prevent="openMenu = true"
-    id="map"
+    id="menu"
     style="background-image: url('/map.png');"
     :class="openMenu ? 'pointer-events-none' : 'pointer-events-auto cursor-pointer'"
     class="bg-no-repeat bg-cover max-w-2xl w-full h-92 flex scale-[15%] justify-center items-center absolute -top-[140px] -left-[250px] z-10"
@@ -93,7 +108,7 @@ function handlePinPosition(e: MouseEvent) {
     <!-- Home -->
     <div 
       ref="home"
-      @click.prevent="handlePinPosition"
+      @click="handleClick"
       :class="openMenu ? 'pointer-events-auto' : 'pointer-events-none'"
       class="cursor-pointer flex flex-col gap-2 justify-center items-center absolute top-[250px] left-[280px]"
     >
@@ -104,7 +119,7 @@ function handlePinPosition(e: MouseEvent) {
     <!-- About -->
     <div 
       ref="about"
-      @click.prevent="handlePinPosition" 
+      @click="handleClick" 
       :class="openMenu ? 'pointer-events-auto' : 'pointer-events-none'"
       class="cursor-pointer flex flex-col gap-2 justify-center items-center absolute top-[160px] left-[550px]"
     >
@@ -115,7 +130,7 @@ function handlePinPosition(e: MouseEvent) {
     <!-- Project -->
     <div 
       ref="project"
-      @click.prevent="handlePinPosition" 
+      @click="handleClick" 
       :class="openMenu ? 'pointer-events-auto' : 'pointer-events-none'"
       class="cursor-pointer flex flex-col gap-2 justify-center items-center absolute top-[100px] left-[100px]"
     >
@@ -151,7 +166,11 @@ function handlePinPosition(e: MouseEvent) {
 </template>
 
 <style>
-* {
+.text-lg {
+  font-family: 'Pirata One';
+}
+
+#text-menu {
   font-family: 'Pirata One';
 }
 </style>

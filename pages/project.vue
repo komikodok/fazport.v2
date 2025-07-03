@@ -1,43 +1,37 @@
 <script setup lang="ts">
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ScrollSmoother } from 'gsap/ScrollSmoother'
-
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 let tl: gsap.core.Timeline | null = null
 
-onMounted(() => {
-    ScrollSmoother.create({
-    smooth: 4,
-    effects: true
-  })
+gsap.registerPlugin(ScrollTrigger)
 
+onMounted(() => {
   tl = gsap.timeline({
     scrollTrigger: {
-        trigger: '#wrapper',
-        start: 'top top',
-        end: '+=100%',
-        pin: true,
-        scrub: 2
+      trigger: '#project',
+      pin: true,
+      scrub: 2,
+      start: 'top top',
+      end: '100%'
     }
   })
-
-  tl.to('#bg-layer', {
-    backgroundPositionY: '100%',
-    backgroundPositionX: '100%'
-  })
   
-}) 
+  tl.add([
+    
+  ])
+})
 </script>
 
 <template>
-  <div id="wrapper" class="w-screen h-screen overflow-hidden relative">
-    <div class="w-full h-full bg-black"></div>
-    <div 
-      id="bg-layer" 
-      style="background-image: url('/forest3.png');"
-      class="w-full h-[100vh] flex flex-col bg-top items-center justify-center gap-6 absolute inset-0 bg-no-repeat bg-cover pointer-events-none"
+  <div
+    id="project" 
+    class="w-screen h-screen relative overflow-hidden"
+  >
+    <div
+      id="forest3"
+      style="background-image: url('/forest5.jpeg'); background-position-y: 40%;"
+      class="bg-cover bg-no-repeat bg-center w-full h-full"
     >
     </div>
   </div>

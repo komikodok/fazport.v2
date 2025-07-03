@@ -7,3 +7,9 @@
         bridging functionality and design to deliver seamless digital experiences.
     </p>
 </template>
+
+<style>
+p {
+    font-family: Cinzel;
+}
+</style>

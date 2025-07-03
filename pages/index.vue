@@ -9,9 +9,13 @@ const endSectionRef = useTemplateRef<(HTMLDivElement)>('end-section');
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
 onMounted(() => {
-  const isSmallScreen = window.innerWidth < 640 
+  gsap.to('#home', 
+    { 
+      filter: 'blur(0px) brightness(1)',
+      ease: 'power1.in'
+    }
+  ),
 
-  const yValue = isSmallScreen ? -30 : -70
   ScrollSmoother.create({
     smooth: 4,
     effects: true
@@ -19,7 +23,7 @@ onMounted(() => {
   
   const tl = gsap.timeline({
     scrollTrigger: {
-      trigger: '#wrapper',
+      trigger: '#home',
       start: 'top top',
       end: '+=250%',
       pin: true,
@@ -86,13 +90,13 @@ function handleClick() {
     ease: 'power2.inOut',
   })
 
-  .to('#wrapper', {
+  .to('#home', {
     duration: 1.2,
     ease: 'power1.in',
     transformOrigin: 'bottom center',
   })
 
-  .to('#wrapper', {
+  .to('#home', {
     filter: 'blur(4px) brightness(0)',
     onComplete: () => {
       navigateTo('/about')
@@ -104,7 +108,7 @@ function handleClick() {
 
 
 <template>
-  <div id="wrapper" class="w-screen h-screen overflow-hidden relative">
+  <div id="home" class="w-screen h-screen overflow-hidden relative">
     <div 
       id="forest" 
       style="background-image: url('/forest.jpeg');"

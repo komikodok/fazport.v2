@@ -24,7 +24,7 @@ onMounted(() => {
 
     const tl = gsap.timeline()
     tl.add([
-        gsap.fromTo('#wrapper', 
+        gsap.fromTo('#about', 
             { filter: 'blur(0px) brightness(0.1)', },
             { 
                 filter: 'blur(0px) brightness(1)',
@@ -92,7 +92,7 @@ function handleTouchMove(e: TouchEvent) {
     <div 
         @mousemove="handleMouseMove" 
         @touchmove="handleTouchMove"
-        id="wrapper" 
+        id="about" 
         class="relative w-screen h-screen overflow-hidden"
     >
 
@@ -135,7 +135,7 @@ function handleTouchMove(e: TouchEvent) {
 </template>
 
 <style>
-* {
+#notif {
     font-family: Cinzel;
 }
 </style>

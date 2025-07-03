@@ -35,3 +35,13 @@
         </ul>
     </div>
 </template>
+
+<style>
+header {
+    font-family: Cinzel;
+}
+
+div {
+    font-family: Cinzel;
+}
+</style>
