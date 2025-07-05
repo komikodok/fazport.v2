@@ -81,7 +81,7 @@ function handleClick(e: MouseEvent) {
     ease: 'power1',
   })
   .to(`#${textContent}`, {
-    filter: 'blur(4px) brightness(0)',
+    filter: 'blur(1px) brightness(0)',
     onComplete: () => {
       setTimeout( () => {
         if (textContent === 'home') {
@@ -90,7 +90,7 @@ function handleClick(e: MouseEvent) {
           navigateTo(`/${textContent}`)
         }
         nextTick()
-      }, 10)
+      }, 20)
     }
   })
 }
