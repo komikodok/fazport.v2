@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 let tl: gsap.core.Timeline | null = null
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
 onMounted(() => {
   gsap.fromTo('#project', 
@@ -14,6 +15,11 @@ onMounted(() => {
         ease: 'power1.in'
     }
   ),
+
+  ScrollSmoother.create({
+    smooth: 4,
+    effects: true
+  })
 
   tl = gsap.timeline({
     scrollTrigger: {

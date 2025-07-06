@@ -7,7 +7,7 @@ import Skills from '~/components/Skills.vue'
 import Menu from '~/components/Menu.vue'
 import { SkillsContent, ProfileContent } from '#components'
 
-const openProfile = ref<boolean>(false)
+const openProfile = ref<boolean>(true)
 const openSkills = ref<boolean>(false)
 
 gsap.registerPlugin(ScrollTrigger)
