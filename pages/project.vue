@@ -3,6 +3,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
+import Menu from '~/components/Menu.vue';
+
 let tl: gsap.core.Timeline | null = null
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
@@ -31,12 +33,20 @@ onMounted(() => {
     }
   })
   
-  tl.add([
-    gsap.to('#door', {
-      x: 50,
-      ease: 'power1'
-    })
-  ])
+  tl.to('#door', {
+    x: 50,
+    ease: 'power1'
+  })
+
+  .fromTo('#box', 
+  { filter: 'blur(1px) brightness(0.2)' },
+  {
+    scale: 3,
+    filter: 'blur(0px) brightness(0.5)',
+    transformOrigin: 'top center',
+    ease:'linear'
+  })
+
 })
 </script>
 
@@ -45,13 +55,20 @@ onMounted(() => {
     id="project" 
     class="w-screen max-w-screen h-screen relative overflow-hidden"
   >
+
+    <Menu />
+
+    <!-- Background -->
     <div class="w-full h-full overflow-hidden">
       <svg class="w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1104 643" fill="none">
 
         <rect width="1104" height="643" fill="url(#pattern0_3_2)"/>
 
+        <!-- Box -->
+        <image id="box" href="/box.png" x="500" y="390" width="60" height="60" />
+
         <g clip-path="url(#clip-house)">
-          <rect id="door" x="495" y="259" width="73" height="217" fill="url(#pattern1_3_2)"/>
+          <rect id="door" x="495" y="259" width="73" height="217" fill="url(#pattern1_3_2)" class="z-10" />
         </g>
 
         <defs>
