@@ -5,6 +5,8 @@ import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 import Menu from '~/components/Menu.vue';
 
+const openBox = ref<boolean>(false)
+
 let tl: gsap.core.Timeline | null = null
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
@@ -34,20 +36,44 @@ onMounted(() => {
   })
   
   tl.to('#door', {
-    x: 50,
+    x: 55,
     ease: 'power1'
   })
 
   .fromTo('#box', 
   { filter: 'blur(1px) brightness(0.2)' },
   {
-    scale: 3,
-    filter: 'blur(0px) brightness(0.5)',
+    scale: 1.8,
+    x: -20,
+    y: 100,
+    filter: 'blur(0px) brightness(0.4)',
     transformOrigin: 'top center',
-    ease:'linear'
+    ease:'linear',
+    onComplete: () => {
+      animateBox()
+    }
+  })
+
+  .to('#overlay', {
+    opacity: 1,
+    ease: 'linear',
   })
 
 })
+
+function animateBox() {
+  gsap.to('#box', {
+    rotation: '+=5',
+    repeat: -1,
+    yoyo: true,
+    transformOrigin: 'center center',
+    ease: 'linear'
+  })
+}
+
+function handleBoxClick() {
+  //
+}
 </script>
 
 <template>
@@ -58,6 +84,9 @@ onMounted(() => {
 
     <Menu />
 
+    <!-- Overlay -->
+    <div id="overlay" class="absolute inset-0 bg-black/60 opacity-0" />
+    
     <!-- Background -->
     <div class="w-full h-full overflow-hidden">
       <svg class="w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1104 643" fill="none">
@@ -65,7 +94,7 @@ onMounted(() => {
         <rect width="1104" height="643" fill="url(#pattern0_3_2)"/>
 
         <!-- Box -->
-        <image id="box" href="/box.png" x="500" y="390" width="60" height="60" />
+        <image @click="handleBoxClick" id="box" href="/box.png" x="500" y="390" width="60" height="60" />
 
         <g clip-path="url(#clip-house)">
           <rect id="door" x="495" y="259" width="73" height="217" fill="url(#pattern1_3_2)" class="z-10" />
@@ -89,6 +118,7 @@ onMounted(() => {
         </defs>
       </svg>
     </div>
+    
   </div>
 </template>
             
