@@ -41,18 +41,19 @@ onMounted(() => {
   })
 
   .fromTo('#box', 
-  { filter: 'blur(1px) brightness(0.2)' },
-  {
-    scale: 1.8,
-    x: -20,
-    y: 100,
-    filter: 'blur(0px) brightness(0.4)',
-    transformOrigin: 'top center',
-    ease:'linear',
-    onComplete: () => {
-      animateBox()
+    { filter: 'blur(1px) brightness(0.2)' },
+    {
+      scale: 1.8,
+      x: -20,
+      y: 100,
+      filter: 'blur(0px) brightness(0.4)',
+      transformOrigin: 'top center',
+      ease:'linear',
+      onComplete: () => {
+        animateBox()
+      }
     }
-  })
+  )
 
   .to('#overlay', {
     opacity: 1,
@@ -62,12 +63,17 @@ onMounted(() => {
 })
 
 function animateBox() {
-  gsap.to('#box', {
+  tl = gsap.timeline()
+
+  tl.to('#box', {
     rotation: '+=5',
     repeat: -1,
     yoyo: true,
     transformOrigin: 'center center',
     ease: 'linear'
+  })
+  .to('', {
+    
   })
 }
 
