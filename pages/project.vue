@@ -90,8 +90,10 @@ function handleBoxClick() {
 
     <Menu />
 
+    <ProjectCarousel />
+
     <!-- Overlay -->
-    <div id="overlay" class="absolute inset-0 bg-black/60 opacity-0" />
+    <div id="overlay" class="absolute inset-0 bg-black/60 opacity-0 z-0" />
     
     <!-- Background -->
     <div class="w-full h-full overflow-hidden">

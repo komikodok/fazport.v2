@@ -5,8 +5,11 @@ const props = defineProps<IProjects>()
 </script>
 
 <template>
-    <div class="card w-82 h-96 shadow-[0_0_40px_#c4b7a7] border-[0.1px] border-[#c4b7a7] rounded-xl flex flex-col overflow-hidden">
-        <h2 class="title font-bold text-xl text-center text-[#5f5145] p-4 w-full h-32">{{ props.title }}</h2>
+    <div 
+      class="card w-72 h-82 border-[0.1px] border-[#c4b7a7] rounded-xl flex flex-col overflow-hidden"
+      :class="props.open && 'shadow-[0_0_40px_#c4b7a7]'"
+    >
+        <h2 class="title text-2xl text-center text-[#5f5145] p-4 w-full h-32">{{ props.title }}</h2>
         <img 
           :src="props.image"
           class="flex-shrink-0 w-full h-32 object-contain"

@@ -3,5 +3,6 @@ export default interface IProjects{
     title: string,
     description: string,
     github: string,
-    image: string
+    image: string,
+    open: boolean
 }
