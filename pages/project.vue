@@ -5,7 +5,7 @@ import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 import Menu from '~/components/Menu.vue';
 
-const openBox = ref<boolean>(false)
+const openCarousel = ref<boolean>(false)
 
 let tl: gsap.core.Timeline | null = null
 
@@ -47,39 +47,22 @@ onMounted(() => {
       x: -20,
       y: 100,
       filter: 'blur(0px) brightness(0.4)',
-      transformOrigin: 'top center',
+      transformOrigin: 'center center',
       ease:'linear',
       onComplete: () => {
-        animateBox()
+        openCarousel.value = true
+
+        gsap.killTweensOf('#box')
       }
     }
   )
 
-  .to('#overlay', {
-    opacity: 1,
-    ease: 'linear',
-  })
+  // .to('#overlay', {
+  //   opacity: 1,
+  //   ease: 'linear',
+  // })
 
 })
-
-function animateBox() {
-  tl = gsap.timeline()
-
-  tl.to('#box', {
-    rotation: '+=5',
-    repeat: -1,
-    yoyo: true,
-    transformOrigin: 'center center',
-    ease: 'linear'
-  })
-  .to('', {
-    
-  })
-}
-
-function handleBoxClick() {
-  //
-}
 </script>
 
 <template>
@@ -90,10 +73,12 @@ function handleBoxClick() {
 
     <Menu />
 
-    <ProjectCarousel />
+    <div v-if="openCarousel" id="carousel">
+      <ProjectCarousel />
+    </div>
 
     <!-- Overlay -->
-    <div id="overlay" class="absolute inset-0 bg-black/60 opacity-0 z-0" />
+    <!-- <div id="overlay" class="absolute inset-0 bg-black/60 opacity-0 z-0" /> -->
     
     <!-- Background -->
     <div class="w-full h-full overflow-hidden">
@@ -102,7 +87,7 @@ function handleBoxClick() {
         <rect width="1104" height="643" fill="url(#pattern0_3_2)"/>
 
         <!-- Box -->
-        <image @click="handleBoxClick" id="box" href="/box.png" x="500" y="390" width="60" height="60" />
+        <image id="box" href="/box.png" x="500" y="390" width="60" height="60" />
 
         <g clip-path="url(#clip-house)">
           <rect id="door" x="495" y="259" width="73" height="217" fill="url(#pattern1_3_2)" class="z-10" />

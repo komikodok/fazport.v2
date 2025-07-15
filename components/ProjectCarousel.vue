@@ -6,7 +6,7 @@ const { data, error } = await useFetch('/api/projects')
 
 const angle = ref<number>(0)
 
-const isOpen = ref<boolean>(true)
+const isOpen = ref<boolean>(false)
 
 let tl: gsap.core.Timeline
 
@@ -25,7 +25,10 @@ function animate() {
     if (isOpen.value) {
         tl = gsap.timeline()
         
-        tl.to('.project-card', {
+        tl.to('#project-carousel', { opacity: 1 })
+        .to('.project-card', {
+            top: '30%',
+            yPercent: -50,
             scale: 1,
             opacity: 1,
             stagger: 0.1,
@@ -40,16 +43,23 @@ function animate() {
             },
             ease: 'power2'
         })
+        .to('.slider', {
+            rotateY: 360,
+            repeat: -1,
+            duration: 15,
+            ease: 'linear'
+        })
     } else {
         tl = gsap.timeline()
 
-        tl.to('.project-card', {
+        tl.to('#project-carousel', { opacity: 1 })
+        .to('.project-card', {
             top: 20,
-            right: 80,
+            right: 40,
             scale: 0.1,
             opacity: 1,
             stagger: 0.1,
-            transformOrigin: 'top center',
+            transformOrigin: 'top right',
             ease: 'power4'
         })
         .to('.project-card', {
@@ -59,16 +69,15 @@ function animate() {
         })
     }
 }
-
 </script>
 
 <template>
-    <div id="project-carousel" class="w-screen h-screen flex justify-center items-center absolute inset-0">
-        <div class="slider w-full h-full absolute inset-0">
+    <div id="project-carousel" class="w-screen h-screen bg-black/80 opacity-0 flex justify-center items-center absolute inset-0">
+        <div class="slider transform-3d w-full h-full absolute inset-0 flex justify-center items-center">
             <div 
                 v-for="(d, index) in data" 
                 :key="index"
-                class="project-card absolute bottom-0 right-1/2 translate-x-1/2 opacity- scale0"
+                class="project-card h-80 cursor-pointer absolute bottom-0 right-[43%] opacity-10 scale-10"              
             >
                 <ProjectCard 
                     :id="d.id"
@@ -85,10 +94,16 @@ function animate() {
 
 <style>
 #project-carousel {
-    perspective: 3500px;
+    perspective: 5000px;
 }
-.slider {
+
+/* .slider {
     transform-style: preserve-3d;
+} */
+
+.project-card {
+  transform: rotateY(0deg) translateZ(0px);
+  transform-origin: center center;
 }
 
 </style>
