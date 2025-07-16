@@ -6,17 +6,16 @@ const props = defineProps<IProjects>()
 
 const cardRef = useTemplateRef<(HTMLDivElement)>('card')
 
-function handleClick() {
-  gsap.to(cardRef.value, {
-    rotateY: "+=180",
-  })
-}
+// function handleClick() {
+//   gsap.to(cardRef.value, {
+//     rotateY: "+=180",
+//   })
+// }
 
 </script>
 
 <template>
     <div 
-      @click="handleClick"
       ref="card"
       class="w-72 h-80 border-[0.1px] border-[#c4b7a7] rounded-xl flex flex-col overflow-hidden"
       :class="props.open && 'shadow-[0_0_40px_#c4b7a7]'"

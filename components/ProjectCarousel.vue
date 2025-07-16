@@ -25,10 +25,10 @@ function animate() {
     if (isOpen.value) {
         tl = gsap.timeline()
         
-        tl.to('#project-carousel', { opacity: 1 })
-        .to('.project-card', {
+        tl.to('.project-card', {
             top: '30%',
-            yPercent: -50,
+            right: '50%',
+            xPercent: 50,
             scale: 1,
             opacity: 1,
             stagger: 0.1,
@@ -50,9 +50,11 @@ function animate() {
             ease: 'linear'
         })
     } else {
+        gsap.killTweensOf('.slider')
+
         tl = gsap.timeline()
 
-        tl.to('#project-carousel', { opacity: 1 })
+        tl.to('.slider', { rotateY: 0 })
         .to('.project-card', {
             top: 20,
             right: 40,
@@ -60,6 +62,7 @@ function animate() {
             opacity: 1,
             stagger: 0.1,
             transformOrigin: 'top right',
+            transform: 'rotateY(0deg) translateZ(0px)',
             ease: 'power4'
         })
         .to('.project-card', {
@@ -72,12 +75,14 @@ function animate() {
 </script>
 
 <template>
-    <div id="project-carousel" class="w-screen h-screen bg-black/80 opacity-0 flex justify-center items-center absolute inset-0">
+    <div id="project-carousel" class="w-screen h-screen flex justify-center items-center absolute inset-0">
+
         <div class="slider transform-3d w-full h-full absolute inset-0 flex justify-center items-center">
             <div 
                 v-for="(d, index) in data" 
                 :key="index"
-                class="project-card h-80 cursor-pointer absolute bottom-0 right-[43%] opacity-10 scale-10"              
+                class="project-card h-80 cursor-pointer absolute bottom-0 max-md:right-[45%] opacity-0 scale-10 z-20"              
+                @click.prevent="() => isOpen = !isOpen"
             >
                 <ProjectCard 
                     :id="d.id"
@@ -96,10 +101,6 @@ function animate() {
 #project-carousel {
     perspective: 5000px;
 }
-
-/* .slider {
-    transform-style: preserve-3d;
-} */
 
 .project-card {
   transform: rotateY(0deg) translateZ(0px);

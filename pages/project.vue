@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
 onMounted(() => {
   gsap.fromTo('#project', 
-    { filter: 'blur(0px) brightness(0.1)', },
+    { filter: 'blur(0px) brightness(0)', },
     { 
         filter: 'blur(0px) brightness(1)',
         ease: 'power1.in'
@@ -52,16 +52,15 @@ onMounted(() => {
       onComplete: () => {
         openCarousel.value = true
 
+        gsap.to('#overlay', {
+          opacity: 1,
+          ease: 'linear',
+        })
+
         gsap.killTweensOf('#box')
       }
     }
   )
-
-  // .to('#overlay', {
-  //   opacity: 1,
-  //   ease: 'linear',
-  // })
-
 })
 </script>
 
@@ -73,12 +72,12 @@ onMounted(() => {
 
     <Menu />
 
+    <!-- Overlay -->
+    <div id="overlay" class="absolute inset-0 bg-black/60 opacity-0" />
+
     <div v-if="openCarousel" id="carousel">
       <ProjectCarousel />
     </div>
-
-    <!-- Overlay -->
-    <!-- <div id="overlay" class="absolute inset-0 bg-black/60 opacity-0 z-0" /> -->
     
     <!-- Background -->
     <div class="w-full h-full overflow-hidden">
