@@ -43,12 +43,6 @@ function animate() {
             },
             ease: 'power2'
         })
-        .to('.slider', {
-            rotateY: 360,
-            repeat: -1,
-            duration: 15,
-            ease: 'linear'
-        })
     } else {
         gsap.killTweensOf('.slider')
 
@@ -63,7 +57,7 @@ function animate() {
             stagger: 0.1,
             transformOrigin: 'top right',
             transform: 'rotateY(0deg) translateZ(0px)',
-            ease: 'power4'
+            ease: 'power1'
         })
         .to('.project-card', {
             rotate: (i) => i * (angle.value / 20),
@@ -72,16 +66,34 @@ function animate() {
         })
     }
 }
+
+function handlePrevClick() {
+    gsap.killTweensOf('.slider')
+
+    gsap.to('.slider', {
+        rotateY: `-=${angle.value}`,
+        ease: 'power4'
+    })
+}
+
+function handleNextClick() {
+    gsap.killTweensOf('.slider')
+
+    gsap.to('.slider', {
+        rotateY: `+=${angle.value}`,
+        ease: 'power4'
+    })
+}
 </script>
 
 <template>
     <div id="project-carousel" class="w-screen h-screen flex justify-center items-center absolute inset-0">
 
-        <div class="slider transform-3d w-full h-full absolute inset-0 flex justify-center items-center">
+        <div class="slider transform-3d w-full h-full -rotate-x-6 absolute inset-0 flex justify-center items-center">
             <div 
                 v-for="(d, index) in data" 
                 :key="index"
-                class="project-card h-80 cursor-pointer absolute bottom-0 max-md:right-[45%] opacity-0 scale-10 z-20"              
+                class="project-card h-80 cursor-pointer absolute bottom-0 opacity-0 scale-10 z-20"              
                 @click.prevent="() => isOpen = !isOpen"
             >
                 <ProjectCard 
@@ -92,6 +104,24 @@ function animate() {
                     :image="d.image"
                     :open="isOpen"
                 />
+            </div>
+        </div>
+
+        <div v-if="isOpen" class="flex justify-between absolute bottom-0 w-96 h-20">
+            <div
+                id="prev-button" 
+                class="w-20 h-20 cursor-pointer"
+                @click="handlePrevClick"
+            >
+                <img src="/prev-button.png" class="object-cover">
+            </div>
+
+            <div 
+                id="next-button" 
+                class="w-20 h-20 cursor-pointer"
+                @click="handleNextClick"
+            >
+                <img src="/next-button.png" class="object-cover">
             </div>
         </div>
     </div>

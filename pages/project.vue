@@ -36,15 +36,14 @@ onMounted(() => {
   })
   
   tl.to('#door', {
-    x: 55,
+    x: 65,
     ease: 'power1'
   })
 
   .fromTo('#box', 
     { filter: 'blur(1px) brightness(0.2)' },
     {
-      scale: 1.8,
-      x: -20,
+      scale: 1.6,
       y: 100,
       filter: 'blur(0px) brightness(0.4)',
       transformOrigin: 'center center',
@@ -80,7 +79,7 @@ onMounted(() => {
     </div>
     
     <!-- Background -->
-    <div class="w-full h-full overflow-hidden">
+    <div class="w-full h-full fixed inset-0 -z-10 overflow-hidden">
       <svg class="w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1104 643" fill="none">
 
         <rect width="1104" height="643" fill="url(#pattern0_3_2)"/>
