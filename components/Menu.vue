@@ -49,8 +49,8 @@ onMounted(() => {
       tl.to('#menu', {
         opacity: 1,
         scale: 0.15,
-        top: -140,
-        left: -250,
+        top: -120,
+        left: -220,
         x: 0,
         y: 0,
         ease: 'power1.in',
@@ -103,14 +103,14 @@ function handleClick(e: MouseEvent) {
     id="menu"
     style="background-image: url('/map.png');"
     :class="openMenu ? 'pointer-events-none' : 'pointer-events-auto cursor-pointer'"
-    class="bg-no-repeat bg-cover max-w-2xl w-full h-92 flex scale-[15%] justify-center items-center absolute -top-[140px] -left-[250px] z-10"
+    class="bg-no-repeat bg-contain max-w-xl w-full h-80 flex scale-[15%] justify-center items-center absolute -top-[120px] -left-[220px] z-10"
   >
     <!-- Home -->
     <div 
       ref="home"
       @click="handleClick"
       :class="openMenu ? 'pointer-events-auto' : 'pointer-events-none'"
-      class="cursor-pointer flex flex-col gap-2 justify-center items-center absolute top-[250px] left-[280px]"
+      class="cursor-pointer flex flex-col gap-2 justify-center items-center absolute top-[210px] left-[240px]"
     >
       <div class="w-2.5 h-2.5 rounded-full bg-black/60 shadow-md"></div>
       <h2 class="text-lg font-extrabold text-black/70 tracking-widest drop-shadow-[2px_2px_1px_rgba(0,0,0,0.3)]">home</h2>
@@ -121,7 +121,7 @@ function handleClick(e: MouseEvent) {
       ref="about"
       @click="handleClick" 
       :class="openMenu ? 'pointer-events-auto' : 'pointer-events-none'"
-      class="cursor-pointer flex flex-col gap-2 justify-center items-center absolute top-[160px] left-[550px]"
+      class="cursor-pointer flex flex-col gap-2 justify-center items-center absolute top-[160px] left-[420px]"
     >
       <div class="w-2.5 h-2.5 rounded-full bg-black/60 shadow-md"></div>
       <h2 class="text-lg font-extrabold text-black/70 tracking-widest drop-shadow-[2px_2px_1px_rgba(0,0,0,0.3)]">about</h2>
@@ -158,7 +158,7 @@ function handleClick(e: MouseEvent) {
 
     <p 
       id="text-menu"
-      class="absolute -bottom-40 text-yellow-200 text-9xl"
+      class="absolute -bottom-40 drop-shadow-[0_0_40px_yellow] text-yellow-200 text-9xl"
     >
       Menu
     </p>

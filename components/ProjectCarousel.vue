@@ -24,21 +24,25 @@ watch(() => isOpen.value, () => animate())
 function animate() {
     if (isOpen.value) {
         tl = gsap.timeline()
-        
-        tl.to('.project-card', {
-            top: '30%',
-            right: '50%',
-            xPercent: 50,
-            scale: 1,
-            opacity: 1,
-            stagger: 0.1,
-            ease: 'power4'
-        })
+
+        tl.add([
+            gsap.to('.project-card', {
+                top: 200,
+                right: 'auto',
+                scale: 1,
+                opacity: 1,
+                stagger: 0.1,
+                transformOrigin: 'center center',
+                ease: 'power4'
+            }),
+            gsap.to('#overlay', { opacity: 1, ease: 'linear'}),
+            gsap.to('#text-project-card', { opacity: 0, ease: 'linear'})
+        ])
         .to('.project-card', {
             stagger: 0.2,
             transform: (i) => {
                 const rotateY = `rotateY(${i * angle.value}deg)`
-                const translateZ = `translateZ(400px)`
+                const translateZ = `translateZ(300px)`
                 return `${rotateY} ${translateZ}`
             },
             ease: 'power2'
@@ -48,7 +52,11 @@ function animate() {
 
         tl = gsap.timeline()
 
-        tl.to('.slider', { rotateY: 0 })
+        tl.add([
+            gsap.to('.slider', { rotateY: 0 }),
+            gsap.to('#overlay', { opacity: 0, ease: 'linear' }),
+            gsap.to('#text-project-card', { opacity: 1, ease: 'linear'})
+        ])
         .to('.project-card', {
             top: 20,
             right: 40,
@@ -89,12 +97,13 @@ function handleNextClick() {
 <template>
     <div id="project-carousel" class="w-screen h-screen flex justify-center items-center absolute inset-0">
 
-        <div class="slider transform-3d w-full h-full -rotate-x-6 absolute inset-0 flex justify-center items-center">
+        <div id="overlay" class="w-full h-full absolute inset-0 opacity-0 bg-black/70"></div>
+
+        <div class="slider transform-3d w-full h-full absolute inset-0 flex justify-center items-center">
             <div 
                 v-for="(d, index) in data" 
                 :key="index"
                 class="project-card h-80 cursor-pointer absolute bottom-0 opacity-0 scale-10 z-20"              
-                @click.prevent="() => isOpen = !isOpen"
             >
                 <ProjectCard 
                     :id="d.id"
@@ -108,22 +117,41 @@ function handleNextClick() {
         </div>
 
         <div v-if="isOpen" class="flex justify-between absolute bottom-0 w-96 h-20">
-            <div
+            <button
                 id="prev-button" 
                 class="w-20 h-20 cursor-pointer"
                 @click="handlePrevClick"
             >
                 <img src="/prev-button.png" class="object-cover">
-            </div>
+            </button>
+            
+            <button 
+                id="close-card-button"
+                class="w-20 h-20 cursor-pointer flex justify-center items-center"
+                @click="() => isOpen = false"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-white drop-shadow-[0_0_8px_white] hover:scale-110 transition">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
+                </svg>
+            </button>
 
-            <div 
+            <button 
                 id="next-button" 
                 class="w-20 h-20 cursor-pointer"
                 @click="handleNextClick"
             >
                 <img src="/next-button.png" class="object-cover">
-            </div>
+            </button>
         </div>
+
+        <p 
+            id="text-project-card"
+            class="absolute top-15 right-8 cursor-pointer drop-shadow-[0_0_8px_yellow] text-yellow-200 text-xl"
+            @click.prevent="() => isOpen = true"
+            style="font-family: Pirata One;"
+        >
+            Card's
+        </p>
     </div>
 </template>
 

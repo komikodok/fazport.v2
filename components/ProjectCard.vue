@@ -28,16 +28,19 @@ function animate() {
   // }
 }
 
+function handleClick() {
+  console.log('clicked!')
+}
+
 </script>
 
 <template>
     <div 
       ref="card"
       class=" w-64 h-80 border-[0.1px] border-[#c4b7a7] rounded-xl relative overflow-hidden"
-      :class="props.open && 'shadow-[0_0_40px_#c4b7a7]'"
+      :class="[props.open ? 'shadow-[0_0_40px_#c4b7a7] pointer-events-auto' : 'pointer-events-none']"
       style="background-image: linear-gradient(to top left, #eee7db, #c4b7a5, #eee7db, #eee7db, #eee7db);"
-      @mouseenter="() => isOpen = true"
-      @mouseleave="() => isOpen = false"
+      @click.prevent="handleClick"
     >
       <div class="absolute inset-0 flex flex-col transition-all">
         <h2 class="title text-2xl text-center text-[#5f5145] p-4 w-full h-32">{{ props.title }}</h2>

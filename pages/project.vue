@@ -51,11 +51,6 @@ onMounted(() => {
       onComplete: () => {
         openCarousel.value = true
 
-        gsap.to('#overlay', {
-          opacity: 1,
-          ease: 'linear',
-        })
-
         gsap.killTweensOf('#box')
       }
     }
@@ -70,9 +65,6 @@ onMounted(() => {
   >
 
     <Menu />
-
-    <!-- Overlay -->
-    <div id="overlay" class="absolute inset-0 bg-black/60 opacity-0" />
 
     <div v-if="openCarousel" id="carousel">
       <ProjectCarousel />

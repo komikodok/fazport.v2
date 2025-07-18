@@ -83,7 +83,7 @@ onMounted(() => {
 
     <p 
         id="text-parchment"
-        class="absolute top-[70px] right-0 opacity-0 text-lg text-yellow-200"
+        class="absolute top-[70px] right-0 opacity-0 drop-shadow-[0_0_8px_yellow] text-lg text-yellow-200"
     >
         Parchment 1
     </p>
