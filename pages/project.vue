@@ -11,7 +11,9 @@ let tl: gsap.core.Timeline | null = null
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
-onMounted(() => {
+onMounted(async () => {
+  await nextTick()
+
   gsap.fromTo('#project', 
     { filter: 'blur(0px) brightness(0)', },
     { 
@@ -55,6 +57,10 @@ onMounted(() => {
       }
     }
   )
+
+  requestAnimationFrame(() => {
+    ScrollTrigger.refresh()
+  })
 })
 </script>
 

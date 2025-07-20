@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import Profile from '~/components/Profile.vue'
 import Skills from '~/components/Skills.vue'
@@ -10,9 +9,9 @@ import { SkillsContent, ProfileContent } from '#components'
 const openProfile = ref<boolean>(true)
 const openSkills = ref<boolean>(false)
 
-gsap.registerPlugin(ScrollTrigger)
-
-onMounted(() => {
+onMounted(async () => {
+    await nextTick()
+    
     setTimeout(() => {
         openProfile.value = false
         openSkills.value = true
@@ -93,7 +92,7 @@ function handleTouchMove(e: TouchEvent) {
         @mousemove="handleMouseMove" 
         @touchmove="handleTouchMove"
         id="about" 
-        class="relative w-screen h-screen overflow-hidden"
+        class="relative w-screen h-screen bg-black overflow-hidden"
     >
 
         <div id="notif" class="flex flex-col gap-2 px-4 py-2 scale-90 opacity-0 fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2">

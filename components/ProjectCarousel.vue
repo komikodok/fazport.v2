@@ -26,7 +26,7 @@ function animate() {
         tl = gsap.timeline()
 
         tl.add([
-            gsap.to('.project-card', {
+            gsap.to('.project-card-wrapper', {
                 top: 200,
                 right: 'auto',
                 scale: 1,
@@ -36,9 +36,9 @@ function animate() {
                 ease: 'power4'
             }),
             gsap.to('#overlay', { opacity: 1, ease: 'linear'}),
-            gsap.to('#text-project-card', { opacity: 0, ease: 'linear'})
+            gsap.to('#text-project-card-wrapper', { opacity: 0, ease: 'linear'})
         ])
-        .to('.project-card', {
+        .to('.project-card-wrapper', {
             stagger: 0.2,
             transform: (i) => {
                 const rotateY = `rotateY(${i * angle.value}deg)`
@@ -55,9 +55,9 @@ function animate() {
         tl.add([
             gsap.to('.slider', { rotateY: 0 }),
             gsap.to('#overlay', { opacity: 0, ease: 'linear' }),
-            gsap.to('#text-project-card', { opacity: 1, ease: 'linear'})
+            gsap.to('#text-project-card-wrapper', { opacity: 1, ease: 'linear'})
         ])
-        .to('.project-card', {
+        .to('.project-card-wrapper', {
             top: 20,
             right: 40,
             scale: 0.1,
@@ -67,7 +67,7 @@ function animate() {
             transform: 'rotateY(0deg) translateZ(0px)',
             ease: 'power1'
         })
-        .to('.project-card', {
+        .to('.project-card-wrapper', {
             rotate: (i) => i * (angle.value / 20),
             stagger: 0.2,
             ease: 'power2'
@@ -80,7 +80,7 @@ function handlePrevClick() {
 
     gsap.to('.slider', {
         rotateY: `+=${angle.value}`,
-        ease: 'power4'
+        ease: 'power1.inOut'
     })
 }
 
@@ -89,7 +89,7 @@ function handleNextClick() {
 
     gsap.to('.slider', {
         rotateY: `-=${angle.value}`,
-        ease: 'power4'
+        ease: 'power1.inOut'
     })
 }
 </script>
@@ -103,7 +103,7 @@ function handleNextClick() {
             <div 
                 v-for="(d, index) in data" 
                 :key="index"
-                class="project-card h-80 cursor-pointer rotate-12 absolute bottom-0 opacity-0 scale-10 z-20"              
+                class="project-card-wrapper h-80 cursor-pointer rotate-12 absolute bottom-0 opacity-0 scale-10 z-20"              
             >
                 <ProjectCard 
                     :id="d.id"
@@ -145,7 +145,7 @@ function handleNextClick() {
         </div>
 
         <p 
-            id="text-project-card"
+            id="text-project-card-wrapper"
             class="absolute top-15 right-8 cursor-pointer drop-shadow-[0_0_8px_yellow] text-yellow-200 text-xl"
             @click.prevent="() => openCarousel = true"
             style="font-family: Pirata One;"
@@ -160,7 +160,7 @@ function handleNextClick() {
     perspective: 5000px;
 }
 
-.project-card {
+.project-card-wrapper {
   transform: rotateY(0deg) translateZ(0px);
   transform-origin: center center;
 }
