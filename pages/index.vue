@@ -114,12 +114,19 @@ function handleClick() {
       style="background-image: url('/forest.jpeg');"
       class="w-full h-[100vh] flex flex-col bg-center items-center justify-center gap-6 absolute inset-0 bg-no-repeat bg-cover blur-[2px] brightness-[60%] pointer-events-none"
     >
-      <strong id="welcome" class="text-white text-7xl opacity-0">W e l c o m e</strong>
+      <strong 
+        id="welcome" 
+        class="text-white text-7xl opacity-0"
+        style="font-family: Lobster;"
+      >
+        W e l c o m e
+      </strong>
 
       <button 
         @click.prevent="handleClick" 
         id="enter" 
         class="btn bg-blue-600 hover:bg-blue-700 border-transparent shadow-none text-white opacity-0 z-50 pointer-events-auto"
+        style="font-family: Poppins;"
       >
         Enter
       </button>
@@ -145,13 +152,3 @@ function handleClick() {
 
   <div ref="end-section"></div>
 </template>
-
-<style>
-#welcome {
-  font-family: Lobster;
-}
-
-#enter {
-  font-family: Poppins;
-}
-</style>

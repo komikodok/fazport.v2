@@ -104,6 +104,7 @@ function handleNextClick() {
                 v-for="(d, index) in data" 
                 :key="index"
                 class="project-card-wrapper h-80 cursor-pointer rotate-12 absolute bottom-0 opacity-0 scale-10 z-20"              
+                style="backface-visibility: hidden;"
             >
                 <ProjectCard 
                     :id="d.id"

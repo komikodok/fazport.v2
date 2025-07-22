@@ -84,13 +84,8 @@ onMounted(() => {
     <p 
         id="text-parchment2"
         class="absolute top-[70px] right-[100px] opacity-0 drop-shadow-[0_0_8px_yellow] text-lg text-yellow-200"
+        style="font-family: Pirata One;"
     >
         Parchment 2
     </p>
 </template>
-
-<style>
-#text-parchment2 {
-    font-family: 'Pirata One';
-}
-</style>

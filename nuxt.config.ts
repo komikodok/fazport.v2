@@ -14,6 +14,7 @@ export default defineNuxtConfig({
       Lobster: true,
       Cinzel: true,
       'Pirata One': true,
+      Tangerine: true,
     },
     display: 'swap',
   },

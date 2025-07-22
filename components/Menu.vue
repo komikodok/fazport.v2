@@ -101,9 +101,12 @@ function handleClick(e: MouseEvent) {
   <div
     @click.prevent="openMenu = true"
     id="menu"
-    style="background-image: url('/map.png');"
     :class="openMenu ? 'pointer-events-none' : 'pointer-events-auto cursor-pointer'"
     class="bg-no-repeat bg-contain max-w-xl w-full h-80 flex scale-[15%] justify-center items-center absolute -top-[120px] -left-[220px] z-10"
+    :style="{
+      backgroundImage: `url('/map.png')`,
+      fontFamily: 'Pirata One'
+    }"
   >
     <!-- Home -->
     <div 
@@ -153,7 +156,7 @@ function handleClick(e: MouseEvent) {
       @click.prevent.stop="openMenu = false"
       class="cursor-pointer pointer-events-auto absolute w-10 h-10 top-3 right-0 flex justify-center items-center"
     >
-      <span class="text-5xl text-[#7a7067]">×</span>
+      <span class="text-6xl text-[#7a7067] font-light" style="font-family: Tangerine;">×</span>
     </div>
 
     <p 
@@ -164,13 +167,3 @@ function handleClick(e: MouseEvent) {
     </p>
   </div>
 </template>
-
-<style>
-.text-lg {
-  font-family: 'Pirata One';
-}
-
-#text-menu {
-  font-family: 'Pirata One';
-}
-</style>

@@ -36,7 +36,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
 header {
     font-family: Cinzel;
 }
