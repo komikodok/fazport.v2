@@ -8,7 +8,9 @@ const endSectionRef = useTemplateRef<(HTMLDivElement)>('end-section');
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
-onMounted(() => {
+onMounted(async () => {
+  await nextTick()
+  
   gsap.to('#home', 
     { 
       filter: 'blur(0px) brightness(1)',

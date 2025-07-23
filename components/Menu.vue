@@ -102,7 +102,7 @@ function handleClick(e: MouseEvent) {
     @click.prevent="openMenu = true"
     id="menu"
     :class="openMenu ? 'pointer-events-none' : 'pointer-events-auto cursor-pointer'"
-    class="bg-no-repeat bg-contain max-w-xl w-full h-80 flex scale-[15%] justify-center items-center absolute -top-[120px] -left-[220px] z-10"
+    class="bg-no-repeat bg-contain max-w-xl w-full h-80 flex scale-[15%] justify-center items-center absolute -top-[120px] -left-[220px] z-[99]"
     :style="{
       backgroundImage: `url('/map.png')`,
       fontFamily: 'Pirata One'

@@ -72,6 +72,8 @@ onMounted(async () => {
 
     <Menu />
 
+    <Info detail="Find a box to unlock a project card (Just scroll down)."/>
+
     <div v-if="openCarousel" id="carousel">
       <ProjectCarousel />
     </div>
