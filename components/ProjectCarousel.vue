@@ -36,7 +36,7 @@ function animate() {
                 ease: 'power4'
             }),
             gsap.to('#overlay', { opacity: 1, ease: 'linear'}),
-            gsap.to('#text-project-card-wrapper', { opacity: 0, ease: 'linear'})
+            gsap.to('#text-project-card', { opacity: 0, ease: 'linear'})
         ])
         .to('.project-card-wrapper', {
             stagger: 0.2,
@@ -55,7 +55,7 @@ function animate() {
         tl.add([
             gsap.to('.slider', { rotateY: 0 }),
             gsap.to('#overlay', { opacity: 0, ease: 'linear' }),
-            gsap.to('#text-project-card-wrapper', { opacity: 1, ease: 'linear'})
+            gsap.to('#text-project-card', { opacity: 1, ease: 'linear'})
         ])
         .to('.project-card-wrapper', {
             top: 20,
@@ -76,8 +76,6 @@ function animate() {
 }
 
 function handlePrevClick() {
-    gsap.killTweensOf('.slider')
-
     gsap.to('.slider', {
         rotateY: `+=${angle.value}`,
         ease: 'power1.inOut'
@@ -85,8 +83,6 @@ function handlePrevClick() {
 }
 
 function handleNextClick() {
-    gsap.killTweensOf('.slider')
-
     gsap.to('.slider', {
         rotateY: `-=${angle.value}`,
         ease: 'power1.inOut'
@@ -146,7 +142,7 @@ function handleNextClick() {
         </div>
 
         <p 
-            id="text-project-card-wrapper"
+            id="text-project-card"
             class="absolute top-15 right-8 cursor-pointer drop-shadow-[0_0_8px_yellow] text-yellow-200 text-xl"
             @click.prevent="() => openCarousel = true"
             style="font-family: Pirata One;"
@@ -156,7 +152,7 @@ function handleNextClick() {
     </div>
 </template>
 
-<style>
+<style scoped>
 #project-carousel {
     perspective: 5000px;
 }

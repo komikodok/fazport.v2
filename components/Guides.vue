@@ -34,7 +34,7 @@ onMounted(() => {
         0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
     </svg>
 
-    <h2 class="text-xl text-yellow-200 drop-shadow-[0_0_9px_yellow]">Info</h2>
+    <h2 class="text-xl text-yellow-200 drop-shadow-[0_0_9px_yellow]">Guides</h2>
   </div>
 
   <div
@@ -47,7 +47,7 @@ onMounted(() => {
     <p>
         <span class="block text-base text-yellow-300 mb-1">⚠️ Helpful Tip</span>
         If the animations aren't casting properly,<br>
-        try refreshing with <span class="font-bold text-yellow-200">CTRL + SHIFT + R</span>.
+        try refreshing or press <span class="font-bold text-yellow-200">CTRL + SHIFT + R</span>.
     </p>
     <p class="block text-base text-yellow-300 mb-1">{{ detail }}</p>
   </div>

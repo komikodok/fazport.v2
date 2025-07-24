@@ -114,7 +114,7 @@ function handleTouchMove(e: TouchEvent) {
                 <Skills :open-skills="openSkills" @is-open="() => openSkills = !openSkills" />
                 <Profile :open-profile="openProfile" @is-open="() => openProfile = !openProfile" />
                 <Menu />
-                <Info detail="Move your cursor (or finger) around to reveal what's hidden." />
+                <Guides detail="Move your cursor (or finger) around to reveal what's hidden." />
             </div>
 
             <div
@@ -135,7 +135,7 @@ function handleTouchMove(e: TouchEvent) {
 
                 <Menu />
 
-                <Info detail="Move your cursor (or finger) around to reveal what's hidden." />
+                <Guides detail="Move your cursor (or finger) around to reveal what's hidden." />
             </div>
         </div>
     </div>
