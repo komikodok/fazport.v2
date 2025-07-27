@@ -77,6 +77,8 @@ onMounted(async () => {
     <div v-if="openCarousel" id="carousel">
       <ProjectCarousel />
     </div>
+
+    <Phone />
     
     <!-- Background -->
     <div class="w-full h-full fixed inset-0 -z-10 overflow-hidden">

@@ -114,7 +114,7 @@ function handleClick() {
     <div 
       id="forest" 
       style="background-image: url('/forest.jpeg');"
-      class="w-full h-[100vh] flex flex-col bg-center items-center justify-center gap-6 absolute inset-0 bg-no-repeat bg-cover blur-[2px] brightness-[60%] pointer-events-none"
+      class="w-full h-[100vh] flex flex-col bg-center items-center justify-center gap-6 absolute inset-0 bg-no-repeat bg-cover blur-[1px] brightness-[60%] pointer-events-none"
     >
       <strong 
         id="welcome" 
