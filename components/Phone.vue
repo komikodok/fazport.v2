@@ -46,12 +46,15 @@ function phoneModeAnimate() {
             style="background-image: url('/walpaper.jpeg');"
             >
             
+            <PhoneScreen />
+            
             <!-- Phone Button -->
             <div class="absolute top-18 -right-3 w-1 h-17 bg-zinc-800 rounded-r-4xl"></div>
             <div @click="phoneModeAnimate" class="absolute cursor-pointer top-40 -right-3 w-1 h-9 bg-zinc-800 rounded-r-4xl">
                 <div class="absolute -right-12 w-10 h-10 bg-white"></div>
             </div>
 
+            <!-- Sleep/Off Mode -->
             <div class="w-full h-full flex flex-col relative">
                 <div 
                     class="sleep-mode w-full h-[0%] absolute top-0 rounded-t-2xl"
