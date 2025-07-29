@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import gsap from 'gsap';
 
-const isPhoneOn = ref<boolean>(true)
+const isPhoneOn = ref<boolean>(false)
 
 let tl: gsap.core.Timeline
 
@@ -46,8 +46,6 @@ function phoneModeAnimate() {
             style="background-image: url('/walpaper.jpeg');"
             >
             
-            <PhoneScreen />
-            
             <!-- Phone Button -->
             <div class="absolute top-18 -right-3 w-1 h-17 bg-zinc-800 rounded-r-4xl"></div>
             <div @click="phoneModeAnimate" class="absolute cursor-pointer top-40 -right-3 w-1 h-9 bg-zinc-800 rounded-r-4xl">
@@ -57,16 +55,18 @@ function phoneModeAnimate() {
             <!-- Sleep/Off Mode -->
             <div class="w-full h-full flex flex-col relative">
                 <div 
-                    class="sleep-mode w-full h-[0%] absolute top-0 rounded-t-2xl"
+                    class="sleep-mode w-full h-[50%] absolute top-0 rounded-t-2xl"
                     style="background-image: linear-gradient(to bottom right, black, black, black, #09090b, black);"
                 />
                 <div
-                    class="sleep-mode w-full h-[0%] absolute bottom-0 bg-black rounded-b-2xl"
+                    class="sleep-mode w-full h-[50%] absolute bottom-0 bg-black rounded-b-2xl"
                     style="background-image: linear-gradient(to top left, black, black, black, #09090b, black);"
                 />
 
                 <div class="boot-flash absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full w-0 h-0 bg-white blur-xs drop-shadow-[0_0_8px_white]"></div>
             </div>
+
+            <PhoneScreen :is-phone-on="isPhoneOn"/>
 
              <!-- Camera -->
             <div class="absolute top-2 left-2 w-5 h-5 flex justify-center items-center rounded-full bg-zinc-950">
