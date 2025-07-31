@@ -1,49 +1,48 @@
 <script setup lang="ts">
-const { isPhoneOn } = defineProps<{
-    isPhoneOn: boolean
+
+const isHomeScreen = ref<boolean>(true)
+const isAssistantScreen = ref<boolean>(false)
+const isMessageScreen = ref<boolean>(false)
+
+const { isSleepMode } = defineProps<{
+    isSleepMode: boolean
 }>()
+
+function openHome() {
+    isHomeScreen.value = true
+    isAssistantScreen.value = false
+    isMessageScreen.value = false
+}
+
+function openAssistant() {
+    isHomeScreen.value = false
+    isAssistantScreen.value = true
+    isMessageScreen.value = false
+}
+
+function openMessage() {
+    isHomeScreen.value = false
+    isAssistantScreen.value = false
+    isMessageScreen.value = true
+}
 </script>
 
 <template>
-    <div v-if="isPhoneOn" class="absolute inset-0">
-        <!-- Phone Header -->
-        <div class="w-full h-1/2 bg-/50 px-3 py-8">
-            <p class="text-3xl text-white">
-                15:09
-            </p>
-            <h2 class="text-xs text-white">Sun, 27 July</h2>
-        </div>
+    <div v-if="!isSleepMode">
+        <PhoneHomeScreen 
+            v-if="isHomeScreen" 
+            @open-assistant="openAssistant"
+            @open-message="openMessage"
+        />
 
-        <!-- Phone Apps -->
-        <div class="w-full h-1/2 grid grid-cols-4 justify-items-center py-10">
-            <!-- Assistant Apps -->
-            <div 
-                class="col-start-2 row-start-1 flex flex-col gap-1 justify-center items-center"
-                @click="console.log('click')" 
-            >
-                <div 
-                    class="cursor-pointer w-9 h-9 rounded-lg bg-cover flex justify-center items-center backdrop-blur-lg border border-white/30"
-                    style="background-image: linear-gradient(135deg, rgba(255,255,255,0.30), rgba(255,255,255,0));"
-                >
-                <img src="/assistant-normal.png" alt="Assistant">
-            </div>
-                <p class="text-white text-xs">Assistant</p>
-            </div>
+        <PhoneAssistantScreen 
+            v-else-if="isAssistantScreen" 
+            
+        />
 
-            <!-- Message Apps -->
-            <div 
-                class="col-start-3 row-start-3 flex flex-col gap-1 justify-center items-center"
-                @click="console.log('click')" 
-            >
-                <div class="cursor-pointer w-9 h-9 rounded-lg bg-yellow-600 flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-white">
-                        <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
-                        <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
-                    </svg>
-                </div>
-                <p class="text-white text-xs">Message</p>
-            </div>
-        </div>
-
+        <PhoneMessageScreen 
+            v-else-if="isMessageScreen" 
+            @close-message="openHome"
+        />
     </div>
 </template>

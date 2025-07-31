@@ -1,24 +1,14 @@
 <script setup lang="ts">
 import gsap from 'gsap';
 
-const isPhoneOn = ref<boolean>(false)
+const isSleepMode = ref<boolean>(true)
 
 let tl: gsap.core.Timeline
 
 function phoneModeAnimate() {
-    isPhoneOn.value = !isPhoneOn.value
+    isSleepMode.value = !isSleepMode.value
 
-    if (isPhoneOn.value) {
-        tl = gsap.timeline()
-        
-        tl.to('.sleep-mode', {
-            opacity: 0,
-            ease: 'power2.inOut',
-        })
-        .to('.sleep-mode', {
-            height: '0%'
-        })
-    } else {
+    if (isSleepMode.value) {
         tl = gsap.timeline()
         
         tl.to('.sleep-mode', {
@@ -31,6 +21,16 @@ function phoneModeAnimate() {
                     { width: '0px', height: '0px', ease: 'power4' }
                 )
             }
+        })
+    } else {
+        tl = gsap.timeline()
+        
+        tl.to('.sleep-mode', {
+            opacity: 0,
+            ease: 'power2.inOut',
+        })
+        .to('.sleep-mode', {
+            height: '0%'
         })
     }
 }
@@ -66,7 +66,7 @@ function phoneModeAnimate() {
                 <div class="boot-flash absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full w-0 h-0 bg-white blur-xs drop-shadow-[0_0_8px_white]"></div>
             </div>
 
-            <PhoneScreen :is-phone-on="isPhoneOn"/>
+            <PhoneScreen :is-sleep-mode="isSleepMode"/>
 
              <!-- Camera -->
             <div class="absolute top-2 left-2 w-5 h-5 flex justify-center items-center rounded-full bg-zinc-950">
