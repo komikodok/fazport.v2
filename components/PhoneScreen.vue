@@ -1,12 +1,18 @@
 <script setup lang="ts">
+import PhoneHomeScreen from './PhoneHomeScreen.vue';
 
-const isHomeScreen = ref<boolean>(true)
-const isAssistantScreen = ref<boolean>(false)
-const isMessageScreen = ref<boolean>(false)
+
+const homeScreen = useTemplateRef<InstanceType<(typeof PhoneHomeScreen)>>('home-screen')
+const assistantApps = homeScreen.value?.assistantApps
+const messageApps = homeScreen.value?.messageApps
 
 const { isSleepMode } = defineProps<{
     isSleepMode: boolean
 }>()
+
+const isHomeScreen = ref<boolean>(true)
+const isAssistantScreen = ref<boolean>(false)
+const isMessageScreen = ref<boolean>(false)
 
 function openHome() {
     isHomeScreen.value = true
@@ -30,6 +36,7 @@ function openMessage() {
 <template>
     <div v-if="!isSleepMode">
         <PhoneHomeScreen 
+            ref="home-screen"
             v-if="isHomeScreen" 
             @open-assistant="openAssistant"
             @open-message="openMessage"
@@ -42,6 +49,7 @@ function openMessage() {
 
         <PhoneMessageScreen 
             v-else-if="isMessageScreen" 
+            :is-message-screen="isMessageScreen"
             @close-message="openHome"
         />
     </div>

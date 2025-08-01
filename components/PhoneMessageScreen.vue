@@ -1,7 +1,13 @@
 <script setup lang="ts">
+import gsap from 'gsap';
 import type IMessage from '~/types/message.type';
 
+const { isMessageScreen } = defineProps<{
+  isMessageScreen: boolean
+}>()
+
 const name = useTemplateRef<HTMLInputElement>('name')
+const messageScreen = useTemplateRef<HTMLInputElement>('message-screen')
 
 const data = reactive<IMessage>({
   id: 0,
@@ -15,13 +21,30 @@ const emit = defineEmits<{
   (e: 'close-message'): void
 }>()
 
+defineExpose({
+  messageScreen
+})
+
 onMounted(() => {
   name.value?.focus()
+
+  gsap.fromTo(messageScreen.value, { opacity: 0.5, scale: 0.3 },
+  {
+    opacity: 1,
+    scale: 1,
+    ease: 'power1'
+  })
 })
+
+const isValid = computed(() =>   
+    data.name.trim() !== '' &&
+    data.email.trim() !== '' &&
+    data.message.trim() !== '' 
+)
 </script>
 
 <template>
-  <div class="absolute inset-0 font-[Poppins]">
+  <div ref="message-screen" class="absolute inset-0 font-[Poppins]">
     <div class="w-full h-full rounded-2xl overflow-hidden flex flex-col bg-base-100 shadow-md">
 
       <!-- Header -->
@@ -108,8 +131,8 @@ onMounted(() => {
         <div class="flex justify-end mt-auto">
           <button 
             type="submit" 
-            class="cursor-pointer p-2 w-10 h-10 rounded-full flex justify-center items-center bg-green-700 transition-all duration-600"
-            :class="data.name ? 'opacity-100' : 'opacity-70'"
+            class="p-2 w-10 h-10 rounded-full flex justify-center items-center bg-green-700 transition-all duration-600"
+            :class="isValid ? 'opacity-100 cursor-pointer' : 'opacity-70 cursor-not-allowed pointer-events-none'"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-white">
               <path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
