@@ -2,8 +2,9 @@
 import gsap from 'gsap';
 import type IMessage from '~/types/message.type';
 
-const { isMessageScreen } = defineProps<{
-  isMessageScreen: boolean
+const props = defineProps<{
+  xOrigin: number
+  yOrigin: number,
 }>()
 
 const name = useTemplateRef<HTMLInputElement>('name')
@@ -18,21 +19,20 @@ const data = reactive<IMessage>({
 })
 
 const emit = defineEmits<{
-  (e: 'close-message'): void
+  (e: 'back-home'): void
 }>()
-
-defineExpose({
-  messageScreen
-})
 
 onMounted(() => {
   name.value?.focus()
+
+  const origin = `${props.xOrigin}px ${props.yOrigin}px`
 
   gsap.fromTo(messageScreen.value, { opacity: 0.5, scale: 0.3 },
   {
     opacity: 1,
     scale: 1,
-    ease: 'power1'
+    transformOrigin: origin,
+    ease: 'power4'
   })
 })
 
@@ -41,6 +41,13 @@ const isValid = computed(() =>
     data.email.trim() !== '' &&
     data.message.trim() !== '' 
 )
+
+function resetForm() {
+  data.name = ''
+  data.email = ''
+  data.subject = ''
+  data.message = ''
+}
 </script>
 
 <template>
@@ -51,7 +58,7 @@ const isValid = computed(() =>
       <div class="h-14 flex justify-between items-center px-2 border-b border-base-200">
         <button 
           class="btn btn-ghost btn-sm"
-          @click="emit('close-message')"
+          @click="emit('back-home')"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -67,8 +74,9 @@ const isValid = computed(() =>
             </svg>
           </button>
           <ul tabindex="0" class="dropdown-content z-10 menu bg-base-100 rounded-box w-40 p-2 shadow">
-            <li><a>Archive</a></li>
-            <li><a class="text-red-500">Delete</a></li>
+            <li @click="resetForm">
+                <a class="text-xs text-red-500">Delete</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -124,7 +132,7 @@ const isValid = computed(() =>
             placeholder="Write your message here..."
             v-model="data.message"
             class=" text-xs p-1 w-full h-full resize-none outline-none"
-          ></textarea>
+          />
         </div>
 
         <!-- Submit -->

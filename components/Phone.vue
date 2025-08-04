@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import gsap from 'gsap';
 
-const isSleepMode = ref<boolean>(true)
+const isSleepMode = ref<boolean>(false)
 
 let tl: gsap.core.Timeline
 
@@ -55,11 +55,11 @@ function phoneModeAnimate() {
             <!-- Sleep/Off Mode -->
             <div class="w-full h-full flex flex-col relative">
                 <div 
-                    class="sleep-mode w-full h-[50%] absolute top-0 rounded-t-2xl"
+                    class="sleep-mode w-full h-[0%] absolute top-0 rounded-t-2xl"
                     style="background-image: linear-gradient(to bottom right, black, black, black, #09090b, black);"
                 />
                 <div
-                    class="sleep-mode w-full h-[50%] absolute bottom-0 bg-black rounded-b-2xl"
+                    class="sleep-mode w-full h-[0%] absolute bottom-0 bg-black rounded-b-2xl"
                     style="background-image: linear-gradient(to top left, black, black, black, #09090b, black);"
                 />
 

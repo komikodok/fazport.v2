@@ -1,35 +1,57 @@
 <script setup lang="ts">
 import PhoneHomeScreen from './PhoneHomeScreen.vue';
 
-
-const homeScreen = useTemplateRef<InstanceType<(typeof PhoneHomeScreen)>>('home-screen')
-const assistantApps = homeScreen.value?.assistantApps
-const messageApps = homeScreen.value?.messageApps
-
 const { isSleepMode } = defineProps<{
     isSleepMode: boolean
 }>()
 
-const isHomeScreen = ref<boolean>(true)
+const homeScreen = useTemplateRef<InstanceType<(typeof PhoneHomeScreen)>>('home-screen')
+
+const appPosition = reactive<{x: number, y: number}>({
+    x: 0,
+    y: 0
+})
+
+const isHomeScreen = ref<boolean>(false)
 const isAssistantScreen = ref<boolean>(false)
 const isMessageScreen = ref<boolean>(false)
 
-function openHome() {
-    isHomeScreen.value = true
+onMounted(() => isHomeScreen.value = true)
+
+function resetScreen() {
+    isHomeScreen.value = false
     isAssistantScreen.value = false
     isMessageScreen.value = false
+}
+
+function openHome() {
+    resetScreen()
+    
+    isHomeScreen.value = true
 }
 
 function openAssistant() {
-    isHomeScreen.value = false
+    const assistantApps = homeScreen.value?.assistantApps
+
+    if (!assistantApps) return
+    
+    resetScreen()
     isAssistantScreen.value = true
-    isMessageScreen.value = false
+
+    appPosition.x = assistantApps.offsetLeft
+    appPosition.y = assistantApps.offsetTop
 }
 
 function openMessage() {
-    isHomeScreen.value = false
-    isAssistantScreen.value = false
+    const messageApps = homeScreen.value?.messageApps
+
+    if (!messageApps) return
+    
+    resetScreen()
     isMessageScreen.value = true
+
+    appPosition.x = messageApps.offsetLeft
+    appPosition.y = messageApps.offsetTop
 }
 </script>
 
@@ -44,13 +66,16 @@ function openMessage() {
 
         <PhoneAssistantScreen 
             v-else-if="isAssistantScreen" 
-            
+            :x-origin="appPosition.x"
+            :y-origin="appPosition.y"
+            @back-home="openHome"
         />
 
         <PhoneMessageScreen 
             v-else-if="isMessageScreen" 
-            :is-message-screen="isMessageScreen"
-            @close-message="openHome"
+            :x-origin="appPosition.x"
+            :y-origin="appPosition.y"
+            @back-home="openHome"
         />
     </div>
 </template>
