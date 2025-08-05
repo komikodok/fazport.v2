@@ -1,7 +1,4 @@
-export default interface IMessage{
-    id: number,
-    name: string,
-    email: string,
-    subject?: string,
-    message: string
+export default interface IMessage {
+    role: 'user' | 'bot',
+    content: string
 }

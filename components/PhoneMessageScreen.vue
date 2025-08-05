@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import gsap from 'gsap';
-import type IMessage from '~/types/message.type';
+import type IContact from '~/types/contact.type';
 
 const props = defineProps<{
   xOrigin: number
@@ -10,7 +10,7 @@ const props = defineProps<{
 const name = useTemplateRef<HTMLInputElement>('name')
 const messageScreen = useTemplateRef<HTMLInputElement>('message-screen')
 
-const data = reactive<IMessage>({
+const data = reactive<IContact>({
   id: 0,
   name: '',
   email: '',

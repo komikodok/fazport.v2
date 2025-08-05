@@ -38,6 +38,7 @@ export default defineEventHandler(() => {
             description: 'What if we build an AI that gives health tips like a helpful friend? Let’s try.',
             body: 'Symp is a health consultation platform powered by AI utilizing RAG (Retrieval-Augmented Generation) technology. Users can receive instant symptom analysis, preliminary medical advice, and soon, document and image-based medical evaluations — all accessible anytime, anywhere.\n\nThis project is built with Nuxt.js for the frontend and API routes, integrated with a Retrieval-Augmented Generation pipeline to enable accurate and context-aware medical responses. The AI model accesses a knowledge base of curated medical documents to generate informed responses.',
             github: 'https://github.com/komikodok/symp-ai',
+            link: 'https://chat-symp.vercel.app/',
             image: '/symp-ai.png'
         }
 
