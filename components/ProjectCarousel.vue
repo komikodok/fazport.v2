@@ -35,7 +35,7 @@ function animate() {
                 transformOrigin: 'center center',
                 ease: 'power4'
             }),
-            gsap.to('#overlay', { opacity: 1, ease: 'linear'}),
+            gsap.to('.overlay', { opacity: 1, ease: 'linear'}),
             gsap.to('#text-project-card', { opacity: 0, ease: 'linear'})
         ])
         .to('.project-card-wrapper', {
@@ -54,7 +54,7 @@ function animate() {
 
         tl.add([
             gsap.to('.slider', { rotateY: 0 }),
-            gsap.to('#overlay', { opacity: 0, ease: 'linear' }),
+            gsap.to('.overlay', { opacity: 0, ease: 'linear' }),
             gsap.to('#text-project-card', { opacity: 1, ease: 'linear'})
         ])
         .to('.project-card-wrapper', {
@@ -93,7 +93,7 @@ function handleNextClick() {
 <template>
     <div id="project-carousel" class="w-screen h-screen flex justify-center items-center absolute inset-0">
 
-        <div id="overlay" class="w-full h-full absolute inset-0 opacity-0 bg-black/70"></div>
+        <div class="overlay w-full h-full absolute inset-0 opacity-0 bg-black/70"></div>
 
         <div class="slider transform-3d w-full h-full absolute inset-0 flex justify-center items-center">
             <div 

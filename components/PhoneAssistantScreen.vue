@@ -2,11 +2,8 @@
 import gsap from 'gsap';
 
 
-const assistantScreen = useTemplateRef<(HTMLDivElement)>('assistant-screen')
-const chatbotContent = useTemplateRef<(HTMLDivElement)>('chatbot-content')
-const assistantAvatar = useTemplateRef<(HTMLDivElement)>('assistant-avatar')
-
 const inputPrompt = ref<string>('')
+const botResponse = ref<string>('Hi!')
 
 const quickPromptIndex = ref<number>(0)
 const quickPrompt = [
@@ -40,7 +37,7 @@ function initialAnimate() {
 
     tl = gsap.timeline()
 
-    tl.fromTo(assistantScreen.value, { opacity: 0.5, scale: 0.3 },
+    tl.fromTo('#assistant-screen', { opacity: 0.5, scale: 0.3 },
     {
         opacity: 1,
         scale: 1,
@@ -48,8 +45,8 @@ function initialAnimate() {
         ease: 'power4'
     })
     .add([
-        gsap.fromTo(chatbotContent.value, { y: 110 }, { y: 0, ease: 'power1' }),
-        gsap.fromTo(assistantAvatar.value, { y: 100 }, { y: 0, delay: 0.5, ease: 'power1' })
+        gsap.fromTo('#chatbot-content', { y: 110 }, { y: 0, ease: 'power1' }),
+        gsap.fromTo('#assistant-avatar', { y: 100 }, { y: 0, delay: 0.5, ease: 'power1' })
     ])
 }
 
@@ -69,12 +66,26 @@ function handleClick(e: MouseEvent) {
 }
 
 function handleSubmit() {
-    //
+    botResponse.value = 'This feature is not available yet. Please stay tuned!'
+
+    tl = gsap.timeline()
+
+    tl.fromTo('#bot-response', { opacity: 0, y: 200 }, {
+        opacity: 1,
+        y: 0,
+        ease: 'power4'
+    })
+    .fromTo('#assistant-avatar', { y: 100 }, {
+        y: 0,
+        ease: 'power1'
+    })
+
+    inputPrompt.value = ''
 }
 </script>
 
 <template>
-    <div ref="assistant-screen" class="absolute inset-0">
+    <div id="assistant-screen" class="absolute inset-0">
         <div class="w-full h-full rounded-2xl flex flex-col overflow-hidden">
             <!-- Header -->
             <div class="h-14 flex justify-between items-center px-5">
@@ -107,7 +118,7 @@ function handleSubmit() {
                         <button 
                             type="submit"
                             class="text-xs text-center w-full drop-shadow-[0_0_10px_#0e7490] my-3 p-0.5 text-white bg-cyan-600 rounded-sm transition-all duration-500"
-                            :class="inputPrompt ? 'opacity-100 cursor-pointer' : 'opacity-50 cursor-not-allowed'"
+                            :class="inputPrompt ? 'opacity-100 cursor-pointer' : 'opacity-0 cursor-not-allowed'"
                             :disabled="!inputPrompt"
                         >
                             Send
@@ -116,12 +127,12 @@ function handleSubmit() {
                 </div>
 
                 <div 
-                    ref="chatbot-content"
+                    id="chatbot-content"
                     class="w-full h-24 absolute bottom-1 flex border-2 border-cyan-600 rounded-2xl shadow-[0_0_20px_#0e7490]"
                     style="background-image: linear-gradient(to right, transparent, transparent, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7), transparent);"
                 >
                     <img 
-                        ref="assistant-avatar"
+                        id="assistant-avatar"
                         src="/assistant-normal.png" 
                         class="w-20 h-20 pointer-events-none absolute bottom-0 object-cover"
                         @contextmenu.prevent=""
@@ -129,9 +140,10 @@ function handleSubmit() {
                     >
                     <div class="overflow-y-scroll w-3/4 h-20 ml-auto my-auto" style="scrollbar-width: none;">
                         <p 
+                            id="bot-response"
                             class="text-white mx-2 p-0.5 text-xs text-center break-words break-all"
                         >
-                            This feature is not available yet. Please stay tuned!
+                            {{ botResponse }}
                         </p>
                     </div>
                 </div>
