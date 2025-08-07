@@ -77,9 +77,9 @@ onMounted(async () => {
     <div v-if="openCarousel" id="carousel">
       <ProjectCarousel />
     </div>
-
-    <Phone />
     
+    <Phone />
+
     <!-- Background -->
     <div class="w-full h-full fixed inset-0 -z-10 overflow-hidden">
       <svg class="w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1104 643" fill="none">

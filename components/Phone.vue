@@ -8,44 +8,71 @@ provide('open-phone', openPhone)
 
 let tl: gsap.core.Timeline
 
-watch(openPhone, () => phoneAnimate())
+onMounted(() => {
+    watch(openPhone, () => phoneAnimate(), { immediate: true })
+})
 
 function phoneAnimate() {
     if (openPhone.value) {
+        gsap.killTweensOf('#phone')
+        
         tl = gsap.timeline()
 
-        tl.to('#phone', {
+        tl.to('#text-phone', {
+            opacity: 0,
+            ease: 'power1'
+        })
+        .to('#phone', {
             top: '50%',
             left: '50%',
             x: '-50%',
             y: '-50%',
             scale: 1,
+            rotate: 0,
             filter: 'drop-shadow(0 0 8px white)',
-            ease: 'power1'
+            ease: 'power1',
+            onComplete: () => {
+                isSleepMode.value = false
+                sleepModeAnimate()
+            }
         })
     } else {
+        isSleepMode.value = true
+        sleepModeAnimate()
+        
         tl = gsap.timeline()
 
         tl.to('#phone', {
-            top: '-240px',
+            top: '-260px',
             left: '130px',
             x: 0,
             y: 0,
-            scale: 0.15,
-            ease: 'power4'
+            scale: 0.10,
+            rotate: -90,
+            filter: 'none',
+            delay: 0.8,
+            ease: 'power4',
+        })
+        .to('#text-phone', {
+            opacity: 1,
+            ease: 'power1'
+        })
+        .to(['#phone', '#text-phone'], {
+            rotation: '+=5',
+            repeat: -1,
+            yoyo: true,
+            ease: 'power1'
         })
     }
 }
  
 function sleepModeAnimate() {
-    isSleepMode.value = !isSleepMode.value
-
     if (isSleepMode.value) {
         tl = gsap.timeline()
         
         tl.to('.sleep-mode', {
             opacity: 1,
-            height: '50.3%',
+            height: '50%',
             ease: 'power2.inOut',
             onComplete: () => {
                 gsap.fromTo('.boot-flash', 
@@ -69,11 +96,9 @@ function sleepModeAnimate() {
 </script>
 
 <template>
-    <div class="overlay fixed inset-0 bg-black/50"></div>
-    <!-- top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_0_8px_white] -->
     <div 
         id="phone"
-        class="w-72 h-[600px] scale-15 absolute -top-[240px] left-[130px] p-2 rounded-4xl"
+        class="w-72 h-[600px] scale-10 absolute -top-[260px] left-[130px] -rotate-90 p-2 rounded-4xl"
         :class="openPhone ? 'pointer-events-none' : 'pointer-events-auto cursor-pointer'"
         @click="openPhone = true"
     >
@@ -84,16 +109,16 @@ function sleepModeAnimate() {
             
             <!-- Phone Button -->
             <div class="absolute top-18 -right-3 w-1 h-17 bg-zinc-800 rounded-r-4xl"></div>
-            <div @click.stop="sleepModeAnimate" class="absolute cursor-pointer pointer-events-auto top-40 -right-3 w-1 h-9 bg-zinc-800 rounded-r-4xl"></div>
+            <div @click.stop="" class="absolute cursor-pointer pointer-events-auto top-40 -right-3 w-1 h-9 bg-zinc-800 rounded-r-4xl"></div>
 
             <!-- Sleep/Off Mode -->
             <div class="w-full h-full flex flex-col relative">
                 <div 
-                    class="sleep-mode w-full h-[50.3%] absolute top-0 rounded-t-2xl"
+                    class="sleep-mode w-full h-[50%] absolute top-0 rounded-t-2xl"
                     style="background-image: linear-gradient(to bottom right, black, black, black, #09090b, black);"
                 />
                 <div
-                    class="sleep-mode w-full h-[50.3%] absolute bottom-0 bg-black rounded-b-2xl"
+                    class="sleep-mode w-full h-[50%] absolute bottom-0 bg-black rounded-b-2xl"
                     style="background-image: linear-gradient(to top left, black, black, black, #09090b, black);"
                 />
 
@@ -111,4 +136,12 @@ function sleepModeAnimate() {
             </div>
         </div>
     </div>
+
+    <p 
+        id="text-phone"
+        class="absolute top-[65px] left-[250px] drop-shadow-[0_0_8px_yellow] text-xl text-yellow-200"
+        style="font-family: Pirata One;"
+    >
+        Phone
+    </p>
 </template>

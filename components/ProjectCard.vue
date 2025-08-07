@@ -85,6 +85,8 @@ function animate() {
         </a>
         <a 
           :href="props.link || '#'" 
+          target="_blank" 
+          rel="noopener noreferrer"
           class="w-10 h-10 mx-10 flex"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-[#5f5145] m-auto">

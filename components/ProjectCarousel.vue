@@ -11,6 +11,7 @@ const openCarousel = ref<boolean>(false)
 let tl: gsap.core.Timeline
 
 onMounted(async () => {
+    console.log(data.value)
     await nextTick()
 
     if (data.value && !error.value) {
@@ -106,8 +107,9 @@ function handleNextClick() {
                     :id="d.id"
                     :title="d.title"
                     :description="d.description"
-                    :github="d.github"
                     :image="d.image"
+                    :github="d.github"
+                    :link="d.link"
                     :open-carousel="openCarousel"
                 />
             </div>
@@ -144,7 +146,7 @@ function handleNextClick() {
         <p 
             id="text-project-card"
             class="absolute top-15 right-8 cursor-pointer drop-shadow-[0_0_8px_yellow] text-yellow-200 text-xl"
-            @click.prevent="() => openCarousel = true"
+            @click="openCarousel = true"
             style="font-family: Pirata One;"
         >
             Card's

@@ -32,7 +32,7 @@ const emit = defineEmits<{
             <!-- Assistant Apps -->
             <div 
                 ref="assistant-apps"
-                class="cursor-pointer col-start-2 row-start-1 flex flex-col gap-1 justify-center items-center"
+                class="cursor-pointer  col-start-2 row-start-1 flex flex-col gap-1 justify-center items-center"
                 @click="emit('open-assistant')" 
             >
                 <div 
@@ -47,7 +47,7 @@ const emit = defineEmits<{
             <!-- Message Apps -->
             <div 
                 ref="message-apps"
-                class="cursor-pointer col-start-3 row-start-3 flex flex-col gap-1 justify-center items-center"
+                class="cursor-pointer  col-start-2 row-start-3 flex flex-col gap-1 justify-center items-center"
                 @click="emit('open-message')" 
             >
                 <div class="w-9 h-9 rounded-lg bg-yellow-600 flex justify-center items-center">
@@ -62,16 +62,16 @@ const emit = defineEmits<{
             <!-- Close Phone -->
             <div 
                 ref="close-phone-apps"
-                class="cursor-pointer col-start-4 row-start-2 flex flex-col gap-1 justify-center items-center"
-                @click="emit('open-message')" 
+                class="cursor-pointer  col-start-3 row-start-2 flex flex-col gap-1 justify-center items-center"
+                @click.stop="openPhone = false" 
             >
-                <div class="w-9 h-9 rounded-lg bg-yellow-600 flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-white">
-                        <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
-                        <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
+                <div class="w-9 h-9 rounded-lg bg-red-500 flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="size-5 text-white">
+                        <path d="M12 2v10" />
+                        <path d="M6.9 5.1a9 9 0 1 0 10.2 0" />
                     </svg>
                 </div>
-                <p class="text-white text-xs">Message</p>
+                <p class="text-white text-xs">Turn Off</p>
             </div>
         </div>
     </div>

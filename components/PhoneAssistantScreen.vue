@@ -128,7 +128,7 @@ function handleSubmit() {
 
                 <div 
                     id="chatbot-content"
-                    class="w-full h-24 absolute bottom-1 flex border-2 border-cyan-600 rounded-2xl shadow-[0_0_20px_#0e7490]"
+                    class="w-full h-24 absolute bottom-1 flex border-2 border-cyan-600 overflow-hidden rounded-2xl shadow-[0_0_20px_#0e7490]"
                     style="background-image: linear-gradient(to right, transparent, transparent, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7), transparent);"
                 >
                     <img 
