@@ -11,7 +11,6 @@ const openCarousel = ref<boolean>(false)
 let tl: gsap.core.Timeline
 
 onMounted(async () => {
-    console.log(data.value)
     await nextTick()
 
     if (data.value && !error.value) {

@@ -93,6 +93,11 @@ function sleepModeAnimate() {
         })
     }
 }
+
+function handlePhoneButton() {
+    isSleepMode.value = !isSleepMode.value
+    sleepModeAnimate()
+}
 </script>
 
 <template>
@@ -109,7 +114,7 @@ function sleepModeAnimate() {
             
             <!-- Phone Button -->
             <div class="absolute top-18 -right-3 w-1 h-17 bg-zinc-800 rounded-r-4xl"></div>
-            <div @click.stop="" class="absolute cursor-pointer pointer-events-auto top-40 -right-3 w-1 h-9 bg-zinc-800 rounded-r-4xl"></div>
+            <div @click.stop="handlePhoneButton" class="absolute cursor-pointer pointer-events-auto top-40 -right-3 w-1 h-9 bg-zinc-800 rounded-r-4xl"></div>
 
             <!-- Sleep/Off Mode -->
             <div class="w-full h-full flex flex-col relative">
