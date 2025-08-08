@@ -24,6 +24,7 @@
             <li>Laravel</li>
             <li>MongoDB</li>
             <li>Express</li>
+            <li>Golang</li>
         </ul>
     </div>
     <div class="w-full">
