@@ -30,7 +30,6 @@ function animate() {
                 top: 200,
                 right: 'auto',
                 scale: 1,
-                opacity: 1,
                 stagger: 0.1,
                 transformOrigin: 'center center',
                 ease: 'power4'
@@ -61,7 +60,7 @@ function animate() {
             top: 20,
             right: 40,
             scale: 0.1,
-            opacity: 1,
+            filter: 'brightness(1) blur(0px)',
             stagger: 0.1,
             transformOrigin: 'top right',
             transform: 'rotateY(0deg) translateZ(0px)',
@@ -99,7 +98,7 @@ function handleNextClick() {
             <div 
                 v-for="(d, index) in data" 
                 :key="index"
-                class="project-card-wrapper h-80 cursor-pointer rotate-12 absolute bottom-0 opacity-0 scale-10 z-20"              
+                class="project-card-wrapper h-80 cursor-pointer rotate-12 absolute bottom-0 brightness-[5%] blur-[2px] -translate-x-10 scale-10 z-20"              
                 style="backface-visibility: hidden;"
             >
                 <ProjectCard 

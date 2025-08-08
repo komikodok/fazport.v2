@@ -138,19 +138,6 @@ function handleClick() {
       <img id="tree-right" src="/tree-right.png" alt="Tree1" class="object-cover h-full absolute -right-64 max-lg:hidden blur-[1px] scale-120 brightness-[7%] z-10">
       <img id="tree-left" src="/tree-left.png" alt="Tree2" class="object-cover h-full absolute -left-64 max-lg:-left-96 blur-[1px] scale-120 brightness-[7%] z-10">
     </div> 
-
-    <div class="absolute bottom-0 right-1/2 opacity-80 animate-bounce flex flex-col gap-3 justify-center items-center translate-x-1/2 my-3">
-      <button 
-        id="scroll-down"
-        @click="() => endSectionRef?.scrollIntoView({behavior: 'smooth'})" 
-        class="w-7 h-7 text-base-200 cursor-pointer animate-pulse flex justify-center items-center rounded-full"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15M9 12l3 3m0 0 3-3m-3 3V2.25" />
-        </svg>
-      </button>
-    </div>
   </div>
 
-  <div ref="end-section"></div>
 </template>

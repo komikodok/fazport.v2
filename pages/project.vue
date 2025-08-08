@@ -33,30 +33,17 @@ onMounted(async () => {
       pin: true,
       scrub: 2,
       start: 'top top',
-      end: '100%'
+      end: '120%'
     }
   })
   
   tl.to('#door', {
     x: 65,
-    ease: 'power1'
-  })
-
-  .fromTo('#box', 
-    { filter: 'blur(1px) brightness(0.2)' },
-    {
-      scale: 1.6,
-      y: 100,
-      filter: 'blur(0px) brightness(0.4)',
-      transformOrigin: 'center center',
-      ease:'linear',
-      onComplete: () => {
-        openCarousel.value = true
-
-        gsap.killTweensOf('#box')
-      }
+    ease: 'power1',
+    onComplete: () => {
+      openCarousel.value = true
     }
-  )
+  })
 
   requestAnimationFrame(() => {
     ScrollTrigger.refresh()
@@ -70,9 +57,12 @@ onMounted(async () => {
     class="w-screen max-w-screen h-screen relative overflow-hidden"
   >
 
+    <Notif class="notif">
+      <p class="text-sm text-yellow-200">Item Acquired</p>
+      <p class="text-xl font-bold text-white typing-text">You got project cards!</p>
+    </Notif>
+  
     <Menu />
-
-    <Guides detail="Find a box to unlock a project card (Just scroll down)."/>
 
     <div v-if="openCarousel" id="carousel">
       <ProjectCarousel />
@@ -86,8 +76,8 @@ onMounted(async () => {
 
         <rect width="1104" height="643" fill="url(#pattern0_3_2)"/>
 
-        <!-- Box -->
-        <image id="box" href="/box.png" x="500" y="390" width="60" height="60" />
+        <!-- Box
+        <image id="box" href="/box.png" x="500" y="390" width="60" height="60" /> -->
 
         <g clip-path="url(#clip-house)">
           <rect id="door" x="495" y="259" width="73" height="217" fill="url(#pattern1_3_2)" class="z-10" />

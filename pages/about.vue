@@ -56,11 +56,11 @@ onMounted(async () => {
             ease: "back.out(1.7)"
         }),
     ])
-    .to('#notif', {
-            opacity: 0,
-            scale: 0.9,
-            display: 'none',
-            ease: 'power2.inOut'
+    .to('.notif', {
+        opacity: 0,
+        scale: 0.9,
+        display: 'none',
+        ease: 'power2.inOut'
     })
 })
 
@@ -95,15 +95,10 @@ function handleTouchMove(e: TouchEvent) {
         class="relative w-screen h-screen bg-black overflow-hidden"
     >
 
-        <div 
-            id="notif" 
-            class="flex flex-col gap-2 px-4 py-2 scale-90 opacity-0 fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2"
-            style="font-family: Cinzel;"
-        >
+        <Notif class="notif">
             <p class="text-sm text-yellow-200">Item Acquired</p>
             <p class="text-xl font-bold text-white typing-text">You got 2 scroll parchments!</p>
-        </div>
-
+        </Notif>
 
         <div class="w-full h-full">
             <div
@@ -114,7 +109,6 @@ function handleTouchMove(e: TouchEvent) {
                 <Skills :open-skills="openSkills" @is-open="() => openSkills = !openSkills" />
                 <Profile :open-profile="openProfile" @is-open="() => openProfile = !openProfile" />
                 <Menu />
-                <Guides detail="Move your cursor (or finger) around to reveal what's hidden." />
             </div>
 
             <div
@@ -135,7 +129,6 @@ function handleTouchMove(e: TouchEvent) {
 
                 <Menu />
 
-                <Guides detail="Move your cursor (or finger) around to reveal what's hidden." />
             </div>
         </div>
     </div>

@@ -29,7 +29,6 @@ function phoneAnimate() {
             y: '-50%',
             scale: 1,
             rotate: 0,
-            filter: 'drop-shadow(0 0 8px white)',
             ease: 'power1',
             onComplete: () => {
                 isSleepMode.value = false
@@ -44,12 +43,11 @@ function phoneAnimate() {
 
         tl.to('#phone', {
             top: '-260px',
-            left: '130px',
+            left: '50px',
             x: 0,
             y: 0,
             scale: 0.10,
             rotate: -90,
-            filter: 'none',
             delay: 0.8,
             ease: 'power4',
         })
@@ -103,18 +101,18 @@ function handlePhoneButton() {
 <template>
     <div 
         id="phone"
-        class="w-72 h-[600px] scale-10 absolute -top-[260px] left-[130px] -rotate-90 p-2 rounded-4xl"
+        class="w-72 h-[600px] scale-10 absolute -top-[260px] left-[50px] -rotate-90 p-2 rounded-4xl"
         :class="openPhone ? 'pointer-events-none' : 'pointer-events-auto cursor-pointer'"
         @click="openPhone = true"
     >
         <div 
-            class="w-full h-[90%] border-6 border-zinc-900 bg-cover bg-zinc-900 ring-2 ring-slate-400 rounded-3xl relative"
+            class="w-full h-[90%] border-6 border-zinc-900 bg-cover bg-zinc-900 ring-2 ring-slate-600 rounded-3xl relative"
             style="background-image: url('/walpaper.jpeg');"
             >
             
             <!-- Phone Button -->
-            <div class="absolute top-18 -right-3 w-1 h-17 bg-zinc-800 rounded-r-4xl"></div>
-            <div @click.stop="handlePhoneButton" class="absolute cursor-pointer pointer-events-auto top-40 -right-3 w-1 h-9 bg-zinc-800 rounded-r-4xl"></div>
+            <div class="absolute top-18 -right-3 w-1 h-17 bg-zinc-950 rounded-r-4xl"></div>
+            <div @click.stop="handlePhoneButton" class="absolute cursor-pointer pointer-events-auto top-40 -right-3 w-1 h-9 bg-zinc-950 rounded-r-4xl"></div>
 
             <!-- Sleep/Off Mode -->
             <div class="w-full h-full flex flex-col relative">
@@ -144,7 +142,7 @@ function handlePhoneButton() {
 
     <p 
         id="text-phone"
-        class="absolute top-[65px] left-[250px] drop-shadow-[0_0_8px_yellow] text-xl text-yellow-200"
+        class="absolute top-[65px] left-[170px] drop-shadow-[0_0_8px_yellow] text-xl text-yellow-200"
         style="font-family: Pirata One;"
     >
         Phone
