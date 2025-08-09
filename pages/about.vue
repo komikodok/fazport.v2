@@ -50,7 +50,7 @@ onMounted(async () => {
             duration: 5,
             ease: 'power3',
         }),
-        gsap.to('#notif', {
+        gsap.to('.notif', {
             opacity: 1,
             scale: 1,
             ease: "back.out(1.7)"
@@ -62,6 +62,16 @@ onMounted(async () => {
         display: 'none',
         ease: 'power2.inOut'
     })
+})
+
+onBeforeRouteLeave(async () => {
+  await new Promise(resolve => {
+    gsap.to('#about', {
+      filter: 'blur(4px) brightness(0)',
+      duration: 0.8,
+      onComplete: resolve
+    })
+  })
 })
 
 function handleMouseMove(e: MouseEvent) {

@@ -101,7 +101,7 @@ function handlePhoneButton() {
 <template>
     <div 
         id="phone"
-        class="w-72 h-[600px] scale-10 absolute -top-[260px] left-[50px] -rotate-90 p-2 rounded-4xl"
+        class="w-72 h-[600px] scale-10 absolute z-[70] -top-[260px] left-[50px] -rotate-90 p-2 rounded-4xl"
         :class="openPhone ? 'pointer-events-none' : 'pointer-events-auto cursor-pointer'"
         @click="openPhone = true"
     >

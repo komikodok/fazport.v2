@@ -84,7 +84,7 @@ function resetForm() {
       <!-- Message Form -->
       <form 
         class="w-full h-full flex flex-col gap-4 p-4 overflow-y-auto"
-        @submit.prevent=""
+        @submit.prevent="() => resetForm()"
       >
         <div class="flex items-center gap-2">
           <label for="name" class="w-22 text-xs text-zinc-800">Name</label>

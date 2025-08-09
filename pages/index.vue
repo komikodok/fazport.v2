@@ -4,27 +4,28 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
-const endSectionRef = useTemplateRef<(HTMLDivElement)>('end-section');
-
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
-
 onMounted(async () => {
   await nextTick()
+  
+  gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
   
   gsap.to('#home', 
     { 
       filter: 'blur(0px) brightness(1)',
       ease: 'power1.in'
     }
-  ),
+  )
 
   ScrollSmoother.create({
     smooth: 4,
-    effects: true
+    effects: true,
+    wrapper: '.smooth-wrapper',
+    content: '.smooth-content'
   })
   
   const tl = gsap.timeline({
     scrollTrigger: {
+      id: 'home',
       trigger: '#home',
       start: 'top top',
       end: '+=250%',
@@ -85,7 +86,7 @@ onMounted(async () => {
 function handleClick() {
   const tl = gsap.timeline();
 
-  tl.to(['#welcome', '#enter', '#scroll-down'], {
+  tl.to(['#welcome', '#enter'], {
     opacity: 0,
     display: 'none',
     duration: 0.6,
@@ -96,48 +97,66 @@ function handleClick() {
     duration: 1.2,
     ease: 'power1.in',
     transformOrigin: 'bottom center',
-  })
-
-  .to('#home', {
-    filter: 'blur(4px) brightness(0)',
     onComplete: () => {
-      navigateTo('/about')
+      navigateTo('/about');
     }
   })
 }
 
+onBeforeUnmount(async () => {
+  ScrollSmoother.get()?.kill()
+  ScrollTrigger.getById('home')?.kill()
+})
+
+onBeforeRouteLeave(async () => {
+  await new Promise(resolve => {
+    gsap.to('#home', {
+      filter: 'blur(4px) brightness(0)',
+      duration: 0.8,
+      onComplete: resolve
+    })
+  })
+})
 </script>
 
 
 <template>
-  <div id="home" class="w-screen h-screen overflow-hidden relative">
-    <div 
-      id="forest" 
-      style="background-image: url('/forest.jpeg');"
-      class="w-full h-[100vh] flex flex-col bg-center items-center justify-center gap-6 absolute inset-0 bg-no-repeat bg-cover blur-[1px] brightness-[60%] pointer-events-none"
-    >
-      <strong 
-        id="welcome" 
-        class="text-white text-7xl opacity-0"
-        style="font-family: Lobster;"
+  <div class="smooth-wrapper">
+    <div class="smooth-content">
+      <div 
+        id="home" 
+        class="w-screen h-screen overflow-hidden relative"
+        style="scrollbar-width: none;"
       >
-        W e l c o m e
-      </strong>
-
-      <button 
-        @click.prevent="handleClick" 
-        id="enter" 
-        class="btn bg-blue-600 hover:bg-blue-700 border-transparent shadow-none text-white opacity-0 z-50 pointer-events-auto"
-        style="font-family: Poppins;"
-      >
-        Enter
-      </button>
+        <div 
+          id="forest" 
+          style="background-image: url('/forest.jpeg');"
+          class="w-full h-[100vh] flex flex-col bg-center items-center justify-center gap-6 absolute inset-0 bg-no-repeat bg-cover blur-[1px] brightness-[60%] pointer-events-none"
+        >
+          <strong 
+            id="welcome" 
+            class="text-white text-7xl opacity-0"
+            style="font-family: Lobster;"
+          >
+            W e l c o m e
+          </strong>
+    
+          <button 
+            @click.prevent="handleClick" 
+            id="enter" 
+            class="btn bg-blue-600 hover:bg-blue-700 border-transparent shadow-none text-white opacity-0 z-50 pointer-events-auto"
+            style="font-family: Poppins;"
+          >
+            Enter
+          </button>
+        </div>
+    
+        <div class="absolute inset-0 w-full h-full pointer-events-none">
+          <img id="tree-right" src="/tree-right.png" alt="Tree1" class="object-cover h-full absolute -right-64 max-lg:hidden blur-[1px] scale-120 brightness-[7%] z-10">
+          <img id="tree-left" src="/tree-left.png" alt="Tree2" class="object-cover h-full absolute -left-64 max-lg:-left-96 blur-[1px] scale-120 brightness-[7%] z-10">
+        </div> 
+      </div>
     </div>
-
-    <div class="absolute inset-0 w-full h-full pointer-events-none">
-      <img id="tree-right" src="/tree-right.png" alt="Tree1" class="object-cover h-full absolute -right-64 max-lg:hidden blur-[1px] scale-120 brightness-[7%] z-10">
-      <img id="tree-left" src="/tree-left.png" alt="Tree2" class="object-cover h-full absolute -left-64 max-lg:-left-96 blur-[1px] scale-120 brightness-[7%] z-10">
-    </div> 
   </div>
 
 </template>
