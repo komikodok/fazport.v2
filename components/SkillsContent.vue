@@ -1,5 +1,5 @@
 <template>
-    <header class="w-full text-center">
+    <!-- <header class="w-full text-center">
         <strong class="text-xl font-extrabold">Skills</strong>
     </header>
     <div class="w-full">
@@ -34,7 +34,7 @@
             <li>Tensorflow</li>
             <li>Docker</li>
         </ul>
-    </div>
+    </div> -->
 </template>
 
 <style scoped>

@@ -13,10 +13,10 @@ onMounted(async () => {
         transformOrigin: '50% 70%',
         duration: 5,
         ease: 'power1',
-        onStart: () => animateLeaf()
+        onComplete: () => animateLeaf()
     })
     .to('#mobile-warning-bg', {
-        x: -300,
+        x: -100,
         y: 100,
         duration: 5,
         ease: 'power1'
@@ -37,23 +37,25 @@ function animateLeaf() {
             { rotation: '-=30', ease: 'sine.out' },            
             { rotation: '+=35',},            
         ],
-        rotateX: 70,
+        rotateX: 60,
         top: '47%',
         right: '60%',
         scale: 1.5,
         duration: 7,
         ease: 'sine.inOut'
     })
-    
-    // .to('#leaf', {
-    //     rotateX: -10,
-    //     top: '100%',
-    //     right: '100%',
-    //     scale: 0.4,
-    //     opacity: 0,
-    //     duration: 10,
-    //     ease: 'linear'
-    // })
+    .to('#leaf', {
+        keyframes: [
+            { rotation: '+=10', rotateX: 70, x: 20, ease: 'sine.out' },
+            { rotation: '-=20', x: -10 },
+            { rotation: '+=10', rotateX: 40, x: 5 },
+            { rotation: '-=20', x: 10 },
+        ],
+        top: '100%',
+        right: '70%',
+        scale: 1,
+        duration: 6,
+    })    
 }
 </script>
 
