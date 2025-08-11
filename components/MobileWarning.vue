@@ -46,16 +46,17 @@ function animateLeaf() {
     })
     .to('#leaf', {
         keyframes: [
-            { rotation: '+=10', rotateX: 70, x: 20, ease: 'sine.out' },
-            { rotation: '-=20', x: -10 },
-            { rotation: '+=10', rotateX: 40, x: 5 },
-            { rotation: '-=20', x: 10 },
+            { rotation: '-=30', ease: 'sine.out' },            
+            { rotation: '+=35',},            
         ],
+        rotateX: 40,
         top: '100%',
         right: '70%',
+        opacity: 0,
         scale: 1,
-        duration: 6,
-    })    
+        duration: 7,
+        ease: 'sine.inOut'
+    })  
 }
 </script>
 

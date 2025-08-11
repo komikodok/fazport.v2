@@ -15,6 +15,7 @@ export default defineNuxtConfig({
       Cinzel: true,
       'Pirata One': true,
       Tangerine: true,
+      "EB Garamond": true,
     },
     display: 'swap',
   },

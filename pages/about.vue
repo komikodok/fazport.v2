@@ -1,22 +1,18 @@
 <script setup lang="ts">
 import gsap from 'gsap'
 
-import Profile from '~/components/Profile.vue'
-import Skills from '~/components/Skills.vue'
-import Menu from '~/components/Menu.vue'
-import { SkillsContent, ProfileContent } from '#components'
+useHead({ title: 'About Me' })
 
 const openProfile = ref<boolean>(true)
-const openSkills = ref<boolean>(false)
+const openSkills = ref<boolean>(true)
 
 onMounted(async () => {
     await nextTick()
     
     setTimeout(() => {
-        openSkills.value = true
+        openSkills.value = false
 
         setTimeout(() => {
-            openSkills.value = false
             openProfile.value = false
         }, 2300)
     }, 2000)
@@ -116,8 +112,8 @@ function handleTouchMove(e: TouchEvent) {
                 style="background-image: url('/forest2.jpeg');"
                 class="w-full h-full absolute inset-0 flex justify-center items-center gap-4 bg-center bg-no-repeat brightness-[20%] bg-cover z-10"
             >
-                <Skills :open-skills="openSkills" :open-profile="openProfile" @is-open="() => openSkills = !openSkills" />
                 <Profile :open-profile="openProfile" :open-skills="openSkills" @is-open="() => openProfile = !openProfile" />
+                <Skills :open-skills="openSkills" :open-profile="openProfile" @is-open="() => openSkills = !openSkills" />
                 <Menu />
             </div>
 
@@ -126,16 +122,24 @@ function handleTouchMove(e: TouchEvent) {
                 style="background-image: url('/forest2.jpeg');"
                 class="w-full h-full absolute inset-0 flex justify-center items-center gap-4 bg-center bg-no-repeat brightness-100 bg-cover"
             >
-                <Skills :open-skills="openSkills" :open-profile="openProfile" @is-open="() => openSkills = !openSkills">
-                    <template #skills-content>
-                        <SkillsContent />
-                    </template>
-                </Skills>
-                <Profile :open-profile="openProfile" :open-skills="openSkills" @is-open="() => openProfile = !openProfile">
+                <Profile 
+                    :open-profile="openProfile" 
+                    :open-skills="openSkills" 
+                    @is-open="() => openProfile = !openProfile"
+                >
                     <template #profile-content>
-                      <ProfileContent />
+                        <ProfileContent />
                     </template>
                 </Profile>
+                <Skills 
+                    :open-skills="openSkills" 
+                    :open-profile="openProfile" 
+                    @is-open="() => openSkills = !openSkills"
+                >
+                    <template #skills-content>
+                      <SkillsContent />
+                    </template>
+                </Skills>
 
                 <Menu />
 

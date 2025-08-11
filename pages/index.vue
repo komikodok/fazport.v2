@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
+
+useHead({ title: 'Landing' })
 
 onMounted(async () => {
   await nextTick()

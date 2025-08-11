@@ -3,9 +3,10 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
-import Menu from '~/components/Menu.vue';
+useHead({ title: 'Project' })
 
 const openCarousel = ref<boolean>(false)
+const showNotif = ref<boolean>(false)
 
 let tl: gsap.core.Timeline | null = null
 
@@ -45,9 +46,33 @@ onMounted(async () => {
     ease: 'power1',
     onComplete: () => {
       openCarousel.value = true
+
+      if (!showNotif.value) {
+        showNotif.value = true
+        
+        tl = gsap.timeline()
+        
+        tl.to('.notif', {
+          opacity: 1,
+          scale: 1,
+          duration: 3,
+          ease: 'power1'
+        })
+        .to('.notif', { 
+          opacity: 0, 
+          scale: 0.9, 
+          ease: 'power1',
+          onComplete: () => {
+            gsap.killTweensOf('.notif')
+          }
+        })
+      }
     }
   })
-
+  .to('#door', {
+    x: 66,
+    ease: 'power1'
+  })
 })
 
 onBeforeUnmount(() => {
