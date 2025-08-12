@@ -25,7 +25,7 @@ function animateBox() {
     .to('#box-lid', {
         x: 15,
         y: -30,
-        delay: 2,
+        delay: 1,
         ease: 'power1',
         onStart: () => {
             gsap.killTweensOf('#box')
@@ -39,6 +39,11 @@ function animateBox() {
         scale: 1,
         opacity: 1,
         ease: 'back.in'
+    })
+    .to('#box-lid', {
+        x: 0,
+        y: 0,
+        ease: 'power1',
     })
 }
 </script>
@@ -59,7 +64,7 @@ function animateBox() {
 
                     <button
                         @click="$router.back()"
-                        class="mt-4 w-52 text-center bg-white text-black font-bold py-2 px-6 rounded-lg shadow-lg transition-all duration-300 z-10"
+                        class="mt-4 w-52 text-center cursor-pointer bg-white text-black font-bold py-2 px-6 rounded-lg shadow-lg transition-all duration-300 z-10"
                     >
                         Go back
                     </button>
