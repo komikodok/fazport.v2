@@ -65,7 +65,7 @@ function animateLeaf() {
     <div
       id="mobile-warning-bg"
       class="absolute inset-0 bg-no-repeat bg-cover"
-      style="background-image: url('/forest2.jpeg'); background-position: center;"
+      style="background-image: url('/forest.jpeg'); background-position: center;"
     />
     
     <div
