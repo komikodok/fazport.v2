@@ -57,12 +57,12 @@ function animateBox() {
                     <h1 class="text-7xl font-extrabold text-white drop-shadow-lg z-10">{{ error.statusCode }}</h1>
                     <p class="text-lg mt-2 text-white text-center font-medium z-10">Oops! {{ error.message }}</p>
 
-                    <NuxtLink
-                        to="/"
+                    <button
+                        @click="$router.back()"
                         class="mt-4 w-52 text-center bg-white text-black font-bold py-2 px-6 rounded-lg shadow-lg transition-all duration-300 z-10"
                     >
-                        Go back home
-                    </NuxtLink>
+                        Go back
+                    </button>
                 </div>
             </div>
 
